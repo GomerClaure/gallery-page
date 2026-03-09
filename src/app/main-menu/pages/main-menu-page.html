@@ -1,0 +1,21 @@
+<section class="main-menu">
+  <div class="main-menu__hero">
+    <p class="main-menu__eyebrow">Menu principal</p>
+    <h1>Selecciona el siguiente punto de acceso para tu visitante.</h1>
+    <p class="main-menu__description">
+      Esta vista es una base inicial. Cualquier interaccion mantiene activa la
+      pantalla; si no hay uso, el sistema vuelve automaticamente al modo de
+      presentacion.
+    </p>
+  </div>
+
+  <div class="main-menu__grid">
+    @for (item of menuItems; track item.title) {
+      <article class="main-menu__card">
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.description }}</p>
+        <button type="button" (click)="registerActivity()">Abrir</button>
+      </article>
+    }
+  </div>
+</section>

@@ -1,0 +1,29 @@
+<section
+  class="screen-saver"
+  tabindex="0"
+  (click)="openMenu()"
+  (pointerup)="openMenu()"
+  (touchend)="openMenu()"
+  (keydown)="openMenuFromKeyboard($event)"
+>
+  <app-event-carousel
+    class="screen-saver__carousel"
+    [items]="slides()"
+    [intervalMs]="5200"
+    [showIndicators]="false"
+  />
+
+  <div class="screen-saver__overlay">
+    <p class="screen-saver__eyebrow">Ballet flolorico tradiciones de mi tierra</p>
+    <h1>BAFOTT 2026</h1>
+    <p class="screen-saver__description">
+      Descubre la magia del ballet folclórico con "Tradiciones de mi Tierra". Sumérgete en una experiencia cultural única que celebra nuestras raíces a través de la danza, la música y el colorido vestuario. ¡No te pierdas esta oportunidad de vivir la tradición como nunca antes!
+    </p>
+
+    <div class="screen-saver__hint-container">
+      <p class="screen-saver__hint">
+        Toca o haz clic en cualquier parte para continuar
+      </p>
+    </div>
+  </div>
+</section>
