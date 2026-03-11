@@ -34,12 +34,20 @@ RUN npm run build
 RUN npm prune --omit=dev
 
 
-# Final stage for app image
+# Final stage for app image (serve built Angular app estaticamente)
 FROM base
 
-# Copy built application
-COPY --from=build /app /app
+WORKDIR /app
 
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
-CMD [ "npm", "run", "start" ]
+# Servidor HTTP simple para servir archivos estáticos
+RUN npm install -g http-server
+
+# Copiar solo los archivos ya compilados de Angular
+# Ruta por defecto de salida con el builder "@angular/build:application"
+COPY --from=build /app/dist/proyecto-prueba/browser ./dist
+
+# Fly está configurado para enrutar al puerto interno 8080
+EXPOSE 8080
+
+# Levanta un servidor estático sobre la carpeta dist
+CMD [ "http-server", "dist", "-p", "8080" ]
