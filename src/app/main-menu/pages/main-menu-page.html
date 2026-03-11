@@ -24,9 +24,18 @@
             <p class="text-[0.62rem] font-black uppercase tracking-[0.18em] text-amber-700">
               Sucursal activa
             </p>
-            <p class="mt-2 font-['Sora'] text-xl font-semibold leading-none text-stone-900 md:text-lg lg:text-xl">
-              Bafott Centro
-            </p>
+            <label class="mt-2 block">
+              <span class="sr-only">Seleccionar sucursal</span>
+              <select
+                class="w-full rounded-[0.95rem] border border-amber-200 bg-white/90 px-3 py-2.5 font-['Sora'] text-lg font-semibold leading-none text-stone-900 outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-200 md:text-base lg:text-lg"
+                [value]="selectedBranch()"
+                (change)="updateBranch(($any($event.target).value))"
+              >
+                @for (branch of branches; track branch) {
+                  <option [value]="branch">{{ branch }}</option>
+                }
+              </select>
+            </label>
           </article>
         </div>
       </div>

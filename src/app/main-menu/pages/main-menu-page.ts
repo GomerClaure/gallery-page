@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
+  signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcrumb.component';
@@ -18,6 +19,14 @@ import { IdleReturnHomeDirective } from '../../shared/directives/idle-return-hom
 })
 export class MainMenuPage {
   private readonly router = inject(Router);
+
+  protected readonly branches = [
+    'Bafott Centro',
+    'Bafott Norte',
+    'Bafott Sur',
+  ];
+
+  protected readonly selectedBranch = signal(this.branches[0]);
 
   protected readonly menuItems = [
     {
@@ -52,5 +61,9 @@ export class MainMenuPage {
 
   protected navigate(route: string): void {
     void this.router.navigateByUrl(route);
+  }
+
+  protected updateBranch(branch: string): void {
+    this.selectedBranch.set(branch);
   }
 }
