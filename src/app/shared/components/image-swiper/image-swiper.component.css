@@ -1,0 +1,36 @@
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+swiper-container,
+swiper-slide {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+@keyframes screenSaverIntro {
+  0% {
+    transform: scale(1.04);
+    filter: brightness(0.85);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+/* Sin animación por defecto */
+.screen-saver-slide {
+  animation-name: none;
+}
+
+/* Cada vez que un slide es activo, se dispara la animación */
+.swiper-slide-active .screen-saver-slide {
+  animation-name: screenSaverIntro;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}

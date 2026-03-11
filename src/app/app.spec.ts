@@ -28,7 +28,7 @@ describe('App', () => {
 
     expect(router.url).toBe('/');
     expect(compiled.querySelector('.screen-saver')).toBeTruthy();
-    expect(compiled.querySelectorAll('.event-carousel__slide').length).toBe(6);
-    expect(compiled.textContent).toContain('Haz clic para continuar');
+    expect(compiled.querySelectorAll('swiper-slide').length).toBe(6);
+    expect(compiled.textContent).toContain('haz clic');
   });
 });

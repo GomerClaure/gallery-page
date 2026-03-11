@@ -1,0 +1,219 @@
+<section
+  class="overflow-x-hidden px-3 py-3 sm:px-5 sm:py-4 md:min-h-dvh md:px-5 md:py-3 lg:px-8 lg:py-6 xl:px-10 xl:py-8"
+  [appIdleReturnHome]="30000"
+  [appIdleReturnTarget]="'/'"
+>
+  <div class="mx-auto flex w-full max-w-7xl flex-col gap-3 sm:gap-4 md:h-full md:gap-3">
+    <header class="rounded-[1.4rem] border border-white/60 bg-white/75 px-3 py-2.5 shadow-[0_18px_50px_rgba(41,37,36,0.06)] backdrop-blur sm:px-5 sm:py-3 md:flex-none md:rounded-[1.6rem] md:px-4 md:py-2.5">
+      <app-breadcrumb
+        [items]="[
+          { label: 'Menu', route: '/menu' },
+          { label: 'Clases y grupos' }
+        ]"
+      />
+    </header>
+
+    <div class="classes-layout grid gap-4 lg:grid-cols-[16.5rem_minmax(0,1fr)] xl:grid-cols-[18rem_minmax(0,1fr)]">
+      <aside class="filters-panel rounded-[1.7rem] border border-white/60 bg-white/78 p-4 shadow-[0_25px_80px_rgba(41,37,36,0.08)] backdrop-blur sm:rounded-[2rem] sm:p-5 md:p-4 lg:p-5">
+        <div class="flex h-full flex-col gap-5 md:gap-4">
+          <header class="space-y-3">
+            <p class="text-[0.68rem] font-black uppercase tracking-[0.18em] text-amber-700 sm:text-sm sm:tracking-[0.22em] md:text-[0.68rem]">
+              Oferta academica
+            </p>
+            <div>
+              <h1 class="font-['Sora'] text-[2rem] font-semibold leading-none text-stone-900 sm:text-4xl md:text-[2rem] xl:text-[2.4rem]">
+                Clases y grupos
+              </h1>
+              <p class="mt-2.5 max-w-sm text-sm leading-6 text-stone-600 sm:mt-3 sm:text-base sm:leading-7 md:mt-2 md:text-sm md:leading-6">
+                Filtra por frecuencia y recorre los grupos disponibles.
+              </p>
+            </div>
+          </header>
+
+          <section class="filter-list grid gap-2 md:grid-cols-2 lg:grid-cols-1">
+            @for (filter of filterOptions; track filter.id) {
+              <button
+                type="button"
+                class="filter-chip w-full rounded-[1.2rem] border p-3.5 text-left transition sm:rounded-[1.4rem] sm:p-4 md:p-3.5"
+                [class.filter-chip--active]="daysFilter() === filter.id"
+                [class.border-amber-300]="daysFilter() === filter.id"
+                [class.bg-amber-50]="daysFilter() === filter.id"
+                [class.shadow-[0_12px_30px_rgba(245,158,11,0.10)]]="daysFilter() === filter.id"
+                [class.border-stone-200]="daysFilter() !== filter.id"
+                [class.bg-white/90]="daysFilter() !== filter.id"
+                (click)="setFilter(filter.id)"
+              >
+                <div class="flex items-center justify-between gap-3">
+                  <div>
+                    <p class="font-semibold text-stone-900 md:text-sm">{{ filter.label }}</p>
+                    <p class="filter-chip__caption mt-1 text-[0.82rem] leading-5 text-stone-500 md:text-[0.78rem]">
+                      {{ filter.caption }}
+                    </p>
+                  </div>
+
+                  <span
+                    class="inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-black"
+                    [class.border-amber-500]="daysFilter() === filter.id"
+                    [class.bg-amber-400]="daysFilter() === filter.id"
+                    [class.text-stone-900]="daysFilter() === filter.id"
+                    [class.border-stone-200]="daysFilter() !== filter.id"
+                    [class.text-stone-400]="daysFilter() !== filter.id"
+                  >
+                    {{ daysFilter() === filter.id ? '✓' : '•' }}
+                  </span>
+                </div>
+              </button>
+            }
+          </section>
+
+        </div>
+      </aside>
+
+      <section class="results-panel rounded-[1.7rem] border border-white/40 bg-stone-950/92 p-3.5 shadow-[0_25px_80px_rgba(41,37,36,0.18)] sm:rounded-[2rem] sm:p-5 md:p-4 lg:p-5">
+        <div class="flex h-full flex-col gap-4">
+          <div class="flex flex-col gap-3 rounded-[1.2rem] border border-white/10 bg-white/6 p-3.5 text-white backdrop-blur sm:rounded-[1.5rem] sm:p-4 md:flex-row md:items-end md:justify-between md:gap-4 md:p-3.5">
+            <div class="min-w-0">
+              <p class="text-xs font-black uppercase tracking-[0.2em] text-amber-200">
+                Vista filtrada
+              </p>
+              <h2 class="mt-2 font-['Sora'] text-2xl font-semibold leading-none md:text-[1.65rem]">
+                {{ activeFilter().label }}
+              </h2>
+              <p class="mt-2 text-sm leading-6 text-stone-300 md:text-[0.82rem] md:leading-5">
+                {{ activeFilter().caption }}. {{ resultsLabel() }} para explorar en esta vista.
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-2 md:max-w-[10rem] md:justify-end">
+              <span class="rounded-full bg-amber-400 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-stone-900">
+                {{ resultsLabel() }}
+              </span>
+            </div>
+          </div>
+
+          @if (filteredClasses().length > 0) {
+            <div class="min-h-0 flex-1 overflow-hidden">
+              <swiper-container
+                slides-per-view="1.06"
+                space-between="16"
+                grab-cursor="true"
+                class="classes-swiper block h-full w-full pb-10"
+                [breakpoints]="classCarouselBreakpoints"
+              >
+                @for (danceClass of filteredClasses(); track danceClass.id) {
+                  <swiper-slide class="h-auto">
+                    <article class="class-card group grid h-full min-h-[20rem] overflow-hidden rounded-[1.5rem] border border-white/10 bg-stone-900 sm:min-h-[25rem] sm:rounded-[1.8rem] md:grid-cols-[minmax(0,1.08fr)_minmax(16rem,0.92fr)]">
+                      <div class="relative min-h-[11.5rem] overflow-hidden sm:min-h-[15rem] md:min-h-0">
+                        <img
+                          [src]="danceClass.image"
+                          [alt]="danceClass.name"
+                          class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-stone-950/92 via-stone-950/20 to-stone-950/15"></div>
+
+                        <div class="absolute inset-x-0 bottom-0 z-10 p-3.5 sm:p-4 md:p-5">
+                          <div class="flex flex-wrap gap-2 text-[0.7rem] font-black uppercase tracking-[0.18em] text-amber-100">
+                            <span class="rounded-full bg-white/10 px-3 py-1.5">{{ danceClass.level }}</span>
+                            <span class="rounded-full bg-white/10 px-3 py-1.5">{{ danceClass.ageRange }}</span>
+                          </div>
+
+                          <div class="mt-3 sm:mt-4">
+                            <h3 class="font-['Sora'] text-[1.75rem] font-semibold leading-none text-white sm:text-3xl md:text-[2rem]">
+                              {{ danceClass.name }}
+                            </h3>
+                            <p class="mt-2.5 max-w-md text-[0.82rem] leading-5 text-stone-200/90 sm:mt-3 sm:text-sm sm:leading-6 md:text-[0.84rem] md:leading-5">
+                              {{ danceClass.description }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="flex h-full flex-col gap-3 bg-linear-to-b from-white/8 to-white/3 p-3.5 text-white sm:gap-4 sm:p-4 md:gap-3 md:p-4">
+                        <div class="grid gap-2.5 sm:gap-3 md:grid-cols-2 md:gap-2.5">
+                          <article class="rounded-[1rem] border border-white/10 bg-white/8 p-3 sm:rounded-[1.2rem] sm:p-3.5">
+                            <p class="text-[0.65rem] font-black uppercase tracking-[0.18em] text-amber-200">
+                              Dias
+                            </p>
+                            <p class="mt-2 text-sm font-semibold text-white md:text-[0.8rem]">
+                              {{ danceClass.daysText }}
+                            </p>
+                          </article>
+
+                          <article class="rounded-[1rem] border border-white/10 bg-white/8 p-3 sm:rounded-[1.2rem] sm:p-3.5">
+                            <p class="text-[0.65rem] font-black uppercase tracking-[0.18em] text-amber-200">
+                              Horario
+                            </p>
+                            <p class="mt-2 text-sm font-semibold text-white md:text-[0.8rem]">
+                              {{ danceClass.time }}
+                            </p>
+                          </article>
+                        </div>
+
+                        <article class="rounded-[1rem] border border-white/10 bg-white/8 p-3 sm:rounded-[1.2rem] sm:p-3.5">
+                          <p class="text-[0.65rem] font-black uppercase tracking-[0.18em] text-amber-200">
+                            Danzas principales
+                          </p>
+                          <div class="mt-3 flex flex-wrap gap-2">
+                            @for (dance of danceClass.dances; track dance) {
+                              <span class="rounded-full bg-white/10 px-3 py-1.5 text-[0.72rem] font-bold text-white">
+                                {{ dance }}
+                              </span>
+                            }
+                          </div>
+                        </article>
+
+                        <article class="rounded-[1rem] border border-white/10 bg-white/8 p-3 sm:rounded-[1.2rem] sm:p-3.5">
+                          <p class="text-[0.65rem] font-black uppercase tracking-[0.18em] text-amber-200">
+                            Docencia
+                          </p>
+                          <div class="mt-3 flex items-center gap-3">
+                            <img
+                              [src]="danceClass.teacher.image"
+                              [alt]="danceClass.teacher.name"
+                              class="h-10 w-10 rounded-xl object-cover ring-2 ring-white/20 sm:h-11 sm:w-11 sm:rounded-2xl"
+                            />
+                            <div class="min-w-0">
+                              <p class="truncate text-sm font-semibold text-white md:text-[0.82rem]">
+                                {{ danceClass.teacher.name }}
+                              </p>
+                              <p class="truncate text-[0.72rem] text-stone-300">
+                                {{ danceClass.teacher.role }}
+                              </p>
+                            </div>
+                          </div>
+                        </article>
+
+                        <button
+                          type="button"
+                          class="mt-auto inline-flex w-full items-center justify-between rounded-[1rem] bg-amber-400 px-4 py-3 text-sm font-extrabold text-stone-900 transition hover:bg-amber-300 sm:rounded-[1.2rem]"
+                          (click)="exploreClass(danceClass.id)"
+                        >
+                          Explorar grupo
+                          <span aria-hidden="true">→</span>
+                        </button>
+                      </div>
+                    </article>
+                  </swiper-slide>
+                }
+              </swiper-container>
+            </div>
+          } @else {
+            <div class="flex min-h-[20rem] items-center justify-center rounded-[1.8rem] border border-dashed border-white/15 bg-white/5 p-8 text-center text-white">
+              <div class="max-w-sm">
+                <p class="text-xs font-black uppercase tracking-[0.2em] text-amber-200">
+                  Sin resultados
+                </p>
+                <h2 class="mt-3 font-['Sora'] text-3xl font-semibold leading-none">
+                  No hay grupos para este filtro
+                </h2>
+                <p class="mt-3 text-sm leading-6 text-stone-300">
+                  Cambia la frecuencia seleccionada para ver otros horarios y grupos disponibles.
+                </p>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    </div>
+  </div>
+</section>

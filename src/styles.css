@@ -1,36 +1,61 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@600;700&display=swap');
+@import 'tailwindcss';
 
-:root {
-  color-scheme: light;
-  font-family: 'Manrope', 'Segoe UI', sans-serif;
-  background:
-    radial-gradient(circle at top, rgba(255, 214, 153, 0.38), transparent 38%),
-    linear-gradient(180deg, #f7f2e8 0%, #f5eee4 42%, #efe0cf 100%);
-  color: #1f2937;
+@theme {
+  --font-sans: 'Manrope', 'Segoe UI', sans-serif;
+  --font-display: 'Sora', 'Manrope', sans-serif;
+  --color-sand-50: #fbf5ec;
+  --color-sand-100: #f5ebda;
+  --color-sand-200: #ead8bb;
+  --color-ink-900: #1c1917;
 }
 
-* {
-  box-sizing: border-box;
-}
+@layer base {
+  :root {
+    color-scheme: light;
+    --app-background:
+      radial-gradient(circle at top, rgba(251, 191, 36, 0.18), transparent 32%),
+      radial-gradient(circle at 85% 18%, rgba(251, 146, 60, 0.12), transparent 24%),
+      linear-gradient(180deg, #fbf5ec 0%, #f7efe2 52%, #f1e1d0 100%);
+    color: #292524;
+    font-family: var(--font-sans);
+  }
 
-html,
-body {
-  min-height: 100%;
-}
+  * {
+    box-sizing: border-box;
+  }
 
-body {
-  margin: 0;
-  min-height: 100dvh;
-}
+  html,
+  body {
+    min-height: 100%;
+    background-color: #f7efe2;
+  }
 
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background-image: var(--app-background);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
-img {
-  display: block;
-  max-width: 100%;
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  @media (max-width: 767px), (max-height: 820px) {
+    body {
+      background-attachment: scroll;
+      background-size: 100% 100%;
+    }
+  }
 }

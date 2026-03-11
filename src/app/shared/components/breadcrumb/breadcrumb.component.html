@@ -1,0 +1,24 @@
+<nav aria-label="Breadcrumb" class="flex flex-wrap items-center gap-2 text-sm text-stone-500">
+  @for (item of items(); track item.label; let isLast = $last) {
+    @if (item.route && !isLast) {
+      <a
+        [routerLink]="item.route"
+        class="rounded-full px-3 py-1 font-semibold text-amber-700 transition hover:bg-amber-100 hover:text-amber-900"
+      >
+        {{ item.label }}
+      </a>
+    } @else {
+      <span
+        class="rounded-full px-3 py-1"
+        [class.font-semibold]="isLast"
+        [class.text-stone-900]="isLast"
+      >
+        {{ item.label }}
+      </span>
+    }
+
+    @if (!isLast) {
+      <span aria-hidden="true" class="text-stone-300">/</span>
+    }
+  }
+</nav>

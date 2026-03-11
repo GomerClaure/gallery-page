@@ -1,29 +1,47 @@
 <section
-  class="screen-saver"
+  class="screen-saver relative min-h-dvh cursor-pointer overflow-hidden bg-stone-950 text-stone-50"
   tabindex="0"
   (click)="openMenu()"
   (pointerup)="openMenu()"
   (touchend)="openMenu()"
   (keydown)="openMenuFromKeyboard($event)"
 >
-  <app-event-carousel
-    class="screen-saver__carousel"
-    [items]="slides()"
-    [intervalMs]="5200"
-    [showIndicators]="false"
+  <app-image-swiper
+    class="absolute inset-0"
+    [slides]="slides()"
+    [autoplayDelay]="5200"
+    effectName="fade"
+    ariaLabel="Presentacion institucional automatica"
+    [pagination]="false"
+    [allowTouchMove]="true"
   />
 
-  <div class="screen-saver__overlay">
-    <p class="screen-saver__eyebrow">Ballet flolorico tradiciones de mi tierra</p>
-    <h1>BAFOTT 2026</h1>
-    <p class="screen-saver__description">
-      Descubre la magia del ballet folclórico con "Tradiciones de mi Tierra". Sumérgete en una experiencia cultural única que celebra nuestras raíces a través de la danza, la música y el colorido vestuario. ¡No te pierdas esta oportunidad de vivir la tradición como nunca antes!
-    </p>
+  <div class="absolute inset-0 bg-gradient-to-r from-stone-950/80 via-stone-950/45 to-transparent"></div>
 
-    <div class="screen-saver__hint-container">
-      <p class="screen-saver__hint">
-        Toca o haz clic en cualquier parte para continuar
+  <div class="relative z-10 grid min-h-dvh content-end px-5 py-8 sm:px-8 lg:content-center lg:px-16">
+    <div class="max-w-3xl">
+      <p class="mb-4 inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.24em] text-amber-200 backdrop-blur">
+        Ballet folklorico tradiciones de mi tierra
       </p>
+      <h1 class="font-['Sora'] text-4xl font-semibold leading-none text-white sm:text-6xl lg:text-8xl">
+        BAFOTT 2026
+      </h1>
+      <p class="mt-5 max-w-2xl text-base leading-7 text-stone-200 sm:text-lg">
+        Descubre la magia del ballet folclorico con Tradiciones de mi Tierra.
+        Vive una experiencia cultural inmersiva que celebra nuestras raices a
+        traves de la danza, la musica y el vestuario.
+      </p>
+
+      <div class="mt-8">
+        <button
+          type="button"
+          class="screen-saver__cta inline-flex max-w-full items-center gap-2 rounded-full border border-amber-300/70 bg-stone-950/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-amber-100 backdrop-blur"
+          (click)="openMenu()"
+        >
+          Toca o haz clic en cualquier parte para continuar
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
     </div>
   </div>
 </section>
