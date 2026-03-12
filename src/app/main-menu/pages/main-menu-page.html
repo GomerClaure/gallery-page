@@ -1,33 +1,47 @@
 <section
-  class="overflow-x-hidden px-3 py-3 sm:px-5 sm:py-4 md:min-h-dvh md:px-5 md:py-3 lg:px-8 lg:py-6 xl:px-10 xl:py-8"
+  class="kiosk-shell overflow-x-hidden px-3 py-3 sm:px-4 sm:py-4 md:min-h-dvh md:px-4 md:py-3 lg:px-6 lg:py-5 xl:px-8 xl:py-6"
   [appIdleReturnHome]="30000"
   [appIdleReturnTarget]="'/'"
 >
-  <div class="mx-auto flex w-full max-w-7xl flex-col gap-3 sm:gap-4 md:h-full md:gap-3">
-    <header class="rounded-[1.4rem] border border-white/60 bg-white/75 px-3 py-2.5 shadow-[0_18px_50px_rgba(41,37,36,0.06)] backdrop-blur sm:px-5 sm:py-3 md:flex-none md:rounded-[1.6rem] md:px-4 md:py-2.5">
+  <div class="mx-auto flex w-full max-w-7xl flex-col gap-3 md:h-full md:gap-3">
+    <header
+      class="rounded-[1.2rem] border border-white/60 bg-white/75 px-3 py-2 shadow-[0_18px_50px_rgba(41,37,36,0.06)] backdrop-blur sm:px-4 sm:py-2.5 md:flex-none md:rounded-[1.4rem]"
+    >
       <app-breadcrumb [items]="[{ label: 'Menu' }]" />
     </header>
 
-    <section class="menu-main flex flex-col gap-4">
-      <div class="rounded-[1.8rem] border border-white/60 bg-white/78 p-4 shadow-[0_25px_80px_rgba(41,37,36,0.08)] backdrop-blur sm:rounded-[2rem] sm:p-5 md:p-4 lg:p-5">
-        <div class="flex flex-col gap-4 md:grid md:grid-cols-[minmax(0,1fr)_11.5rem] md:items-end lg:grid-cols-[minmax(0,1fr)_13rem]">
-          <div class="max-w-2xl">
-            <p class="text-[0.68rem] font-black uppercase tracking-[0.18em] text-amber-700 sm:text-sm sm:tracking-[0.22em]">
-              Navegacion principal
+    <section class="menu-main flex flex-col gap-3">
+      <div
+        class="hero-panel rounded-[1.5rem] border border-white/60 bg-white/78 p-3.5 shadow-[0_25px_80px_rgba(41,37,36,0.08)] backdrop-blur sm:p-4 md:p-3.5 lg:p-4"
+      >
+        <div
+          class="hero-layout flex flex-col gap-3 md:grid md:grid-cols-[minmax(0,1fr)_10rem] md:items-center lg:grid-cols-[minmax(0,1fr)_11rem]"
+        >
+          <div class="max-w-2xl min-w-0">
+            <p
+              class="text-[0.62rem] font-black uppercase tracking-[0.16em] text-amber-700 sm:text-[0.7rem] sm:tracking-[0.2em]"
+            >
+              Navegación principal
             </p>
-            <h1 class="mt-2.5 font-['Sora'] text-[2rem] font-semibold leading-none text-stone-900 sm:text-4xl md:text-[2.1rem] lg:text-[2.4rem] xl:text-[2.8rem]">
+
+            <h1
+              class="mt-1.5 font-['Sora'] text-[1.65rem] font-semibold leading-none text-stone-900 sm:text-[2rem] md:text-[1.8rem] lg:text-[2.15rem] xl:text-[2.4rem]"
+            >
               Explora la academia
             </h1>
           </div>
 
-          <article class="rounded-[1.3rem] border border-amber-200 bg-linear-to-br from-amber-50 to-white px-4 py-4 text-stone-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] md:px-3.5 md:py-3.5">
-            <p class="text-[0.62rem] font-black uppercase tracking-[0.18em] text-amber-700">
+          <article
+            class="branch-card rounded-[1.05rem] border border-amber-200 bg-linear-to-br from-amber-50 to-white px-3 py-3 text-stone-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] md:px-3 md:py-2.5"
+          >
+            <p class="text-[0.58rem] font-black uppercase tracking-[0.16em] text-amber-700">
               Sucursal activa
             </p>
-            <label class="mt-2 block">
+
+            <label class="mt-1.5 block">
               <span class="sr-only">Seleccionar sucursal</span>
               <select
-                class="w-full rounded-[0.95rem] border border-amber-200 bg-white/90 px-3 py-2.5 font-['Sora'] text-lg font-semibold leading-none text-stone-900 outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-200 md:text-base lg:text-lg"
+                class="branch-select w-full rounded-[0.85rem] border border-amber-200 bg-white/90 px-3 py-2 font-['Sora'] text-base font-semibold leading-none text-stone-900 outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-200 md:text-[0.95rem] lg:text-base"
                 [value]="selectedBranch()"
                 (change)="updateBranch(($any($event.target).value))"
               >
@@ -40,7 +54,7 @@
         </div>
       </div>
 
-      <div class="menu-grid grid gap-3 sm:gap-4 md:grid-cols-2">
+      <div class="menu-grid grid gap-3 sm:gap-3.5 md:grid-cols-2">
         @for (item of menuItems; track item.title; let itemIndex = $index) {
           <app-menu-tile
             [title]="item.title"
