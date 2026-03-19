@@ -472,3 +472,176 @@ VALUES
   ('academy_short_name', 'BAFOTT', 'Nombre corto'),
   ('welcome_message', 'Toca la pantalla para conocer nuestros grupos de danza', 'Mensaje principal del kiosco'),
   ('idle_timeout_seconds', '30', 'Tiempo de inactividad para volver al inicio');
+
+
+
+-- =========================
+-- dances
+-- =========================
+INSERT OR IGNORE INTO dances (name, slug, description, origin_region, is_active)
+VALUES
+('Cueca Cochabambina', 'cueca-cochabambina', 'Danza tradicional de Cochabamba', 'Cochabamba', 1),
+('Cueca Paceña', 'cueca-pacena', 'Cueca del altiplano paceño', 'La Paz', 1),
+('Cueca Tarijeña', 'cueca-tarijena', 'Cueca del sur de Bolivia', 'Tarija', 1),
+('Caporales', 'caporales', 'Danza moderna inspirada en ritmos afrobolivianos', 'La Paz', 1),
+('Tinku', 'tinku', 'Danza ritual del norte de Potosí', 'Potosí', 1),
+('Morenada', 'morenada', 'Danza emblemática del altiplano', 'La Paz', 1),
+('Diablada', 'diablada', 'Danza de máscaras del carnaval', 'Oruro', 1),
+('Saya Afroboliviana', 'saya-afroboliviana', 'Danza afroboliviana', 'Yungas', 1),
+('Chacarera', 'chacarera', 'Danza tradicional del sur', 'Tarija', 1),
+('Taquirari', 'taquirari', 'Danza alegre del oriente', 'Santa Cruz', 1),
+('Carnavalito', 'carnavalito', 'Danza festiva andina', 'Potosí', 1),
+('Kullawada', 'kullawada', 'Danza textil andina', 'La Paz', 1),
+('Llamerada', 'llamerada', 'Danza de pastores', 'Altiplano', 1),
+('Doctorcitos', 'doctorcitos', 'Danza tradicional urbana', 'La Paz', 1),
+('Waca Waca', 'waca-waca', 'Danza satírica', 'Altiplano', 1),
+('Pujllay', 'pujllay', 'Danza de celebración', 'Chuquisaca', 1),
+('Salay', 'salay', 'Danza juvenil popular', 'Cochabamba', 1),
+('Ayarichi', 'ayarichi', 'Danza ritual ancestral', 'Potosí', 1),
+('Chovena', 'chovena', 'Danza amazónica', 'Beni', 1),
+('Torito', 'torito', 'Danza de festividad', 'Potosí', 1),
+('Kaluyo', 'kaluyo', 'Danza tradicional antigua', 'Altiplano', 1),
+('Cueca Chuquisaqueña', 'cueca-chuquisaquena', 'Cueca elegante', 'Chuquisaca', 1),
+('Bailecito', 'bailecito', 'Danza del sur andino', 'Tarija', 1),
+('Zampoñada', 'zamponada', 'Danza con instrumentos andinos', 'Altiplano', 1),
+('Kantus', 'kantus', 'Danza musical ceremonial', 'Altiplano', 1),
+('Potolos', 'potolos', 'Danza festiva', 'Chuquisaca', 1),
+('Tobas', 'tobas', 'Danza guerrera', 'Oriente', 1),
+('Chutas', 'chutas', 'Danza carnavalera', 'La Paz', 1),
+('Auqui Auqui', 'auqui-auqui', 'Danza tradicional', 'La Paz', 1),
+('Suri Sicuri', 'suri-sicuri', 'Danza con sikus', 'Altiplano', 1);
+
+-- =========================
+-- teachers
+-- =========================
+INSERT OR IGNORE INTO teachers (full_name, bio, is_active)
+VALUES
+('Fabiola Marquez Mamani', 'Profesora de danza folklórica', 1),
+('Cristhian Fuente Villarroel', 'Instructor de danza', 1),
+('Jhanneth Higuera Siles', 'Profesora de danza', 1),
+('Yorgeli Ayaviri Vargas', 'Instructora de danza', 1),
+('Israel Fuentes Villarroel', 'Profesor de danza', 1),
+('Shanesia Ayaviri Vargas', 'Instructora de danza', 1),
+('Erlinda Medrano Z.', 'Profesora de danza folklórica', 1);
+
+
+-- =========================
+-- level-dances
+-- =========================
+INSERT INTO level_dances (level_id, dance_id)
+SELECT l.id, d.id
+FROM levels l
+JOIN dances d
+WHERE d.slug IN (
+  'cueca-cochabambina',
+  'caporales',
+  'tinku',
+  'morenada',
+  'salay',
+  'taquirari'
+)
+AND NOT EXISTS (
+  SELECT 1 FROM level_dances ld
+  WHERE ld.level_id = l.id AND ld.dance_id = d.id
+);
+
+-- =========================
+-- level_teachers
+-- =========================
+INSERT INTO level_teachers (level_id, teacher_id, role)
+SELECT l.id, t.id, 'principal'
+FROM levels l
+JOIN teachers t
+WHERE t.full_name IN (
+  'Fabiola Marquez Mamani',
+  'Cristhian Fuente Villarroel',
+  'Jhanneth Higuera Siles'
+)
+AND NOT EXISTS (
+  SELECT 1 FROM level_teachers lt
+  WHERE lt.level_id = l.id AND lt.teacher_id = t.id
+);
+-- =========================
+-- branch_contacts
+-- =========================
+-- ===============================
+-- WHATSAPP
+-- ===============================
+INSERT INTO branch_contacts (
+  branch_id,
+  contact_type,
+  label,
+  value,
+  url,
+  sort_order,
+  is_active
+)
+SELECT
+  b.id,
+  'whatsapp',
+  'WhatsApp',
+  '72265111',
+  'https://wa.me/59172265111',
+  1,
+  1
+FROM branches b;
+
+-- ===============================
+-- FACEBOOK
+-- ===============================
+INSERT INTO branch_contacts (
+  branch_id,
+  contact_type,
+  label,
+  url,
+  sort_order,
+  is_active
+)
+SELECT
+  b.id,
+  'facebook',
+  'Facebook',
+  'https://www.facebook.com/Ballettradicionesdemiterra/?locale=es_LA',
+  2,
+  1
+FROM branches b;
+
+-- ===============================
+-- INSTAGRAM
+-- ===============================
+INSERT INTO branch_contacts (
+  branch_id,
+  contact_type,
+  label,
+  url,
+  sort_order,
+  is_active
+)
+SELECT
+  b.id,
+  'instagram',
+  'Instagram',
+  'https://www.instagram.com/bafott_ballet_folklorico/',
+  3,
+  1
+FROM branches b;
+
+-- ===============================
+-- UBICACIÓN (GOOGLE MAPS)
+-- ===============================
+INSERT INTO branch_contacts (
+  branch_id,
+  contact_type,
+  label,
+  url,
+  sort_order,
+  is_active
+)
+SELECT
+  b.id,
+  'maps',
+  'Ubicación',
+  'https://share.google/nOFxvgBbg0QmCUJx5',
+  4,
+  1
+FROM branches b;

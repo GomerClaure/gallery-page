@@ -44,4 +44,9 @@ __screenshots__/
 Thumbs.db
 
 # wangler files
-.wrangler/*
+wrangler.jsonc
+wrangler.toml
+.wrangler/
+.dev.vars
+.env
+.env.*

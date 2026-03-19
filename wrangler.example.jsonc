@@ -2,17 +2,19 @@
   "name": "academy-info-bafott",
   "compatibility_date": "2026-03-18",
   "pages_build_output_dir": "dist/proyecto-prueba/browser",
+
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "academy-info-bafott",
-      "database_id": "32e7cf82-f244-4e4b-a1ab-465941c49995"
+      "database_name": "ACADEMY_INFO_BAFOTT_DB_NAME",
+      "database_id": "REEMPLAZAR_CON_DATABASE_ID"
     }
   ],
+
   "r2_buckets": [
     {
       "binding": "BUCKET",
-      "bucket_name": "kiosco-bafott-media"
+      "bucket_name": "REEMPLAZAR_CON_BUCKET_NAME"
     }
   ]
 }
