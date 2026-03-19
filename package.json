@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "db:migrate": "npx wrangler d1 execute academy-info-bafott --remote --file=./db/migrations/0001_initial.sql",
+    "db:seed": "npx wrangler d1 execute academy-info-bafott --local --file=./db/seeds/001_initial_content.sql"
   },
   "private": true,
   "packageManager": "npm@10.9.4",

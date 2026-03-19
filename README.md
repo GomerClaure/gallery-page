@@ -44,15 +44,44 @@ To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use th
 ng test
 ```
 
-## Running end-to-end tests
+## Database (Cloudflare D1)
 
-For end-to-end (e2e) testing, run:
+This project uses a Cloudflare D1 database named `academy-info-bafott`. Make sure you have the [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/) installed.
+
+### 1. Login and list databases
 
 ```bash
-ng e2e
+npx wrangler login
+npx wrangler d1 list
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### 2. Run migrations (remote)
+
+Comando directo que usas:
+
+```bash
+npx wrangler d1 execute academy-info-bafott --remote --file=./db/migrations/0001_initial.sql
+```
+
+Atajo con npm (opcional):
+
+```bash
+npm run db:migrate
+```
+
+### 3. Run seeds (local)
+
+Comando directo que usas:
+
+```bash
+npx wrangler d1 execute academy-info-bafott --local --file=./db/seeds/001_initial_content.sql
+```
+
+Atajo con npm (opcional):
+
+```bash
+npm run db:seed
+```
 
 ## Additional Resources
 
