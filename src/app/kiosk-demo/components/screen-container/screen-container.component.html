@@ -1,0 +1,39 @@
+<section
+  class="relative mx-auto flex min-h-dvh w-full max-w-[1440px] flex-col px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8"
+  [appIdleReturnHome]="idleMs()"
+  [appIdleReturnTarget]="'/'"
+>
+  <div class="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem]">
+    <div class="floating-orb absolute left-[8%] top-[10%] h-40 w-40 rounded-full bg-amber-200/50 blur-3xl"></div>
+    <div class="floating-orb-delayed absolute bottom-[12%] right-[10%] h-56 w-56 rounded-full bg-sky-200/40 blur-3xl"></div>
+  </div>
+
+  <div
+    class="relative flex flex-1 flex-col overflow-hidden rounded-[2rem] border border-white/60 bg-white/80 shadow-[0_24px_80px_rgba(148,163,184,0.18)] backdrop-blur-xl"
+    [class]="compact() ? 'p-4' : 'p-5 sm:p-6 lg:p-8'"
+  >
+    @if (title() || subtitle() || eyebrow()) {
+      <header class="mb-6 flex flex-col gap-2 lg:mb-8">
+        @if (eyebrow()) {
+          <span class="text-xs font-semibold uppercase tracking-[0.28em] text-stone-500">
+            {{ eyebrow() }}
+          </span>
+        }
+
+        @if (title()) {
+          <h1 class="font-display text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">
+            {{ title() }}
+          </h1>
+        }
+
+        @if (subtitle()) {
+          <p class="max-w-3xl text-sm leading-6 text-stone-600 sm:text-base">
+            {{ subtitle() }}
+          </p>
+        }
+      </header>
+    }
+
+    <ng-content />
+  </div>
+</section>

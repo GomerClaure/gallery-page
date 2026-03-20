@@ -1,0 +1,19 @@
+<app-screen-container
+  eyebrow="Niveles"
+  [title]="'Nuestros niveles disponibles · ' + group.name"
+  [subtitle]="group.description"
+>
+  <div class="mb-6">
+    <app-back-button (pressed)="goBack()" />
+  </div>
+
+  <div class="grid gap-4 lg:grid-cols-2">
+    @for (level of group.levels; track level.id; let index = $index) {
+      <app-level-card
+        [level]="level"
+        [index]="index"
+        (selected)="openLevel($event)"
+      />
+    }
+  </div>
+</app-screen-container>

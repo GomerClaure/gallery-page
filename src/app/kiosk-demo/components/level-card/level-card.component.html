@@ -1,0 +1,16 @@
+<button
+  type="button"
+  class="flex w-full items-center gap-4 rounded-[1.75rem] border border-stone-200 bg-white px-5 py-5 text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:border-stone-300 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-400"
+  (click)="selected.emit(level().id)"
+>
+  <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-[1.25rem] bg-stone-100 text-lg font-semibold text-stone-700">
+    {{ index() + 1 }}
+  </div>
+
+  <div class="min-w-0 flex-1">
+    <h3 class="truncate text-2xl font-semibold text-stone-900">{{ level().name }}</h3>
+    <p class="mt-2 text-sm leading-6 text-stone-500">{{ level().shortDescription }}</p>
+  </div>
+
+  <span class="text-xl text-stone-400">›</span>
+</button>

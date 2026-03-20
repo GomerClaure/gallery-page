@@ -1,0 +1,17 @@
+<app-screen-container [compact]="true">
+  <div class="relative flex flex-1">
+    <app-hero-welcome
+      [branch]="content.selectedBranch()"
+      (start)="openGroups()"
+    />
+
+    @if (shouldShowModal()) {
+      <app-branch-selector-modal
+        [branches]="content.branches()"
+        [selectedBranchId]="content.selectedBranch()?.id ?? null"
+        (selected)="selectBranch($event)"
+        (confirmed)="openGroups()"
+      />
+    }
+  </div>
+</app-screen-container>

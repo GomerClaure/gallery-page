@@ -1,0 +1,45 @@
+.hero-glow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(32px);
+  opacity: 0.8;
+  animation: float 16s ease-in-out infinite;
+}
+
+.hero-glow-1 {
+  top: 8%;
+  left: 8%;
+  width: 12rem;
+  height: 12rem;
+  background: rgba(251, 191, 36, 0.22);
+}
+
+.hero-glow-2 {
+  right: 8%;
+  top: 18%;
+  width: 15rem;
+  height: 15rem;
+  background: rgba(125, 211, 252, 0.24);
+  animation-delay: -5s;
+}
+
+.hero-glow-3 {
+  left: 42%;
+  bottom: 8%;
+  width: 16rem;
+  height: 16rem;
+  background: rgba(251, 146, 60, 0.16);
+  animation-delay: -9s;
+}
+
+.floating-panel {
+  animation: float 10s ease-in-out infinite;
+}
+
+.animate-entrance {
+  animation: rise-in 900ms ease-out both;
+}
+
+.animate-entrance-delay {
+  animation: rise-in 1100ms ease-out both;
+}

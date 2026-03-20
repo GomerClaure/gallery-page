@@ -69,7 +69,7 @@ export class ScreenSaverPage {
   }
 
   protected openMenu(): void {
-    void this.router.navigateByUrl('/menu');
+    void this.router.navigateByUrl('/kiosk');
   }
 
   protected openMenuFromKeyboard(event: KeyboardEvent): void {

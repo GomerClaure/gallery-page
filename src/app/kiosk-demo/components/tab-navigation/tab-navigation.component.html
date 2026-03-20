@@ -1,0 +1,15 @@
+<nav class="inline-flex flex-wrap gap-2 rounded-full bg-stone-100 p-2">
+  @for (tab of tabs(); track tab.id) {
+    <button
+      type="button"
+      class="rounded-full px-5 py-3 text-sm font-semibold transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-400"
+      [class.bg-white]="activeTab() === tab.id"
+      [class.text-stone-900]="activeTab() === tab.id"
+      [class.shadow-sm]="activeTab() === tab.id"
+      [class.text-stone-500]="activeTab() !== tab.id"
+      (click)="tabChanged.emit(tab.id)"
+    >
+      {{ tab.label }}
+    </button>
+  }
+</nav>

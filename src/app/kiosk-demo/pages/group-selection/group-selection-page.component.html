@@ -1,0 +1,15 @@
+<app-screen-container
+  eyebrow="Exploración"
+  title="¿En qué grupo estás interesado?"
+  subtitle="Selecciona el segmento que mejor se ajusta a tu edad o al tipo de experiencia que deseas explorar."
+>
+  <div class="mb-6">
+    <app-back-button (pressed)="goBack()" />
+  </div>
+
+  <div class="grid flex-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+    @for (group of content.groups(); track group.id) {
+      <app-group-card [group]="group" (selected)="openLevels($event)" />
+    }
+  </div>
+</app-screen-container>

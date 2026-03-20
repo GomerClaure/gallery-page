@@ -9,34 +9,39 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'menu',
+    path: 'kiosk',
     loadComponent: () =>
-      import('./main-menu/pages/main-menu-page').then(
-        (module) => module.MainMenuPage,
+      import('./kiosk-demo/pages/welcome/welcome-page.component').then(
+        (module) => module.WelcomePageComponent,
       ),
   },
   {
-    path: 'menu/clases',
+    path: 'kiosk/grupos',
     loadComponent: () =>
-      import('./main-menu/pages/clases-page/clases-page.component').then(
-        (module) => module.ClasesPageComponent,
+      import('./kiosk-demo/pages/group-selection/group-selection-page.component').then(
+        (module) => module.GroupSelectionPageComponent,
       ),
   },
   {
-    path: 'menu/clases/:id',
+    path: 'kiosk/grupos/:groupId/niveles',
     loadComponent: () =>
-      import('./main-menu/pages/clases-detail-page/clases-detail-page.component').then(
-        (module) => module.ClasesDetailPageComponent,
+      import('./kiosk-demo/pages/group-levels/group-levels-page.component').then(
+        (module) => module.GroupLevelsPageComponent,
       ),
   },
   {
-    path: 'clases',
-    redirectTo: 'menu/clases',
-    pathMatch: 'full',
+    path: 'kiosk/grupos/:groupId/niveles/:levelId',
+    loadComponent: () =>
+      import('./kiosk-demo/pages/group-detail/group-detail-page.component').then(
+        (module) => module.GroupDetailPageComponent,
+      ),
   },
   {
-    path: 'clases/:id',
-    redirectTo: 'menu/clases/:id',
+    path: 'kiosk/grupos/:groupId/niveles/:levelId/eventos/:eventId',
+    loadComponent: () =>
+      import('./kiosk-demo/pages/event-detail/event-detail-page.component').then(
+        (module) => module.EventDetailPageComponent,
+      ),
   },
   {
     path: '**',
