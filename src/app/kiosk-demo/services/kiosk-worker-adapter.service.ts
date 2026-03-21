@@ -74,7 +74,7 @@ export class KioskWorkerAdapterService {
         dto.fullDescription ?? dto.shortDescription ?? 'Detalle pendiente desde base de datos.',
       schedules: dto.schedules.map((schedule) => this.toSchedule(schedule)),
       dances: dto.dances.map((dance) => dance.name),
-      teacher: this.pickTeacher(dto.teachers),
+      teachers: this.toTeachers(dto.teachers),
       events: dto.events.map((event) => this.toLevelEvent(event)),
     };
   }
@@ -118,18 +118,36 @@ export class KioskWorkerAdapterService {
     };
   }
 
-  private pickTeacher(teachers: WorkerTeacherDto[]): Teacher {
-    const mainTeacher =
-      teachers.find((teacher) => teacher.isMain) ??
-      teachers.find((teacher) => teacher.role === 'principal') ??
-      teachers[0];
+  private toTeachers(teachers: WorkerTeacherDto[]): Teacher[] {
+    if (!teachers.length) {
+      return [
+        {
+          name: 'Equipo docente',
+          role: 'Docencia',
+          bio: 'Información docente disponible al conectar con Workers.',
+          portrait: 'assets/face.jpg',
+          isMain: true,
+        },
+      ];
+    }
 
-    return {
-      name: mainTeacher?.fullName ?? 'Equipo docente',
-      role: mainTeacher?.role ?? 'Docencia',
-      bio: mainTeacher?.bio ?? 'Información docente disponible al conectar con Workers.',
-      portrait: mainTeacher?.photoUrl ?? 'assets/face.jpg',
-    };
+    const mapped = teachers.map((teacher) => ({
+      id: String(teacher.id),
+      name: teacher.fullName,
+      role: teacher.role ?? (teacher.isMain ? 'principal' : 'auxiliar'),
+      bio: teacher.bio ?? 'Información docente disponible al conectar con Workers.',
+      portrait: teacher.photoUrl ?? 'assets/face.jpg',
+      isMain: teacher.isMain ?? teacher.role === 'principal',
+    }));
+
+    if (!mapped.some((teacher) => teacher.isMain)) {
+      mapped[0].isMain = true;
+      if (!mapped[0].role || mapped[0].role.toLowerCase() === 'docencia') {
+        mapped[0].role = 'principal';
+      }
+    }
+
+    return mapped;
   }
 
   private extractCity(address: string | null): string {

@@ -21,11 +21,14 @@ const createTeacher = (
   role: string,
   bio: string,
   portrait: string,
+  isMain = false,
 ): Teacher => ({
+  id: name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
   name,
   role,
   bio,
   portrait,
+  isMain,
 });
 
 const eventAssets = (
@@ -192,12 +195,21 @@ export const kioskGroups: InterestGroup[] = [
           ['Jueves', '09:30 - 11:00'],
         ]),
         dances: ['Cueca Cochabambina', 'Caporales', 'Tinku', 'Salay'],
-        teacher: createTeacher(
-          'Fabiola Marquez Mamani',
-          'Profesora principal',
-          'Profesora de danza folclórica con enfoque formativo para etapas iniciales y montaje escénico infantil.',
-          'assets/face.jpg',
-        ),
+        teachers: [
+          createTeacher(
+            'Fabiola Marquez Mamani',
+            'principal',
+            'Profesora de danza folclórica con enfoque formativo para etapas iniciales y montaje escénico infantil.',
+            'assets/face.jpg',
+            true,
+          ),
+          createTeacher(
+            'Jhanneth Higuera Siles',
+            'auxiliar',
+            'Apoyo pedagógico en coordinación motriz, seguimiento de grupos y acompañamiento escénico infantil.',
+            'assets/face.jpg',
+          ),
+        ],
         events: [melodiesEvent, bolivianitaEvent],
       }),
       createLevel({
@@ -212,12 +224,12 @@ export const kioskGroups: InterestGroup[] = [
           ['Viernes', '18:00 - 19:00'],
         ]),
         dances: ['Carnavalito', 'Tobas', 'Taquirari', 'Morenada'],
-        teacher: createTeacher(
+        teachers: [createTeacher(
           'Jhanneth Higuera Siles',
           'Profesora principal',
           'Especialista en repertorio infantil y procesos de transición al escenario.',
           'assets/face.jpg',
-        ),
+        )],
         events: [soledadEvent, bolivianitaEvent],
       }),
     ],
@@ -244,12 +256,28 @@ export const kioskGroups: InterestGroup[] = [
           ['Viernes', '16:00 - 17:00'],
         ]),
         dances: ['Caporales', 'Tinku', 'Morenada', 'Tobas'],
-        teacher: createTeacher(
-          'Cristhian Fuente Villarroel',
-          'Profesor principal',
-          'Instructor de danza con trabajo enfocado en potencia, disciplina y lectura escénica juvenil.',
-          'assets/face.jpg',
-        ),
+        teachers: [
+          createTeacher(
+            'Cristhian Fuente Villarroel',
+            'principal',
+            'Instructor de danza con trabajo enfocado en potencia, disciplina y lectura escénica juvenil.',
+            'assets/face.jpg',
+            true,
+          ),
+          createTeacher(
+            'Israel Fuentes Villarroel',
+            'principal',
+            'Codirección del nivel para montaje, limpieza coreográfica y preparación para escenario.',
+            'assets/face.jpg',
+            true,
+          ),
+          createTeacher(
+            'Yorgeli Ayaviri Vargas',
+            'auxiliar',
+            'Apoyo de aula en ensayos, correcciones por bloques y acompañamiento de elencos.',
+            'assets/face.jpg',
+          ),
+        ],
         events: [melodiesEvent, boliviaMagicaEvent],
       }),
       createLevel({
@@ -263,12 +291,12 @@ export const kioskGroups: InterestGroup[] = [
           ['Jueves', '09:30 - 11:00'],
         ]),
         dances: ['Llamerada', 'Cueca Chuquisaqueña', 'Pujllay', 'Saya Afroboliviana'],
-        teacher: createTeacher(
+        teachers: [createTeacher(
           'Israel Fuentes Villarroel',
           'Profesor principal',
           'Profesor de danza y montaje grupal con foco en limpieza, sincronía y narrativa escénica.',
           'assets/face.jpg',
-        ),
+        )],
         events: [soledadEvent, boliviaMagicaEvent],
       }),
     ],
@@ -295,12 +323,12 @@ export const kioskGroups: InterestGroup[] = [
           ['Viernes', '20:00 - 21:00'],
         ]),
         dances: ['Cueca Cochabambina', 'Morenada', 'Tinku', 'Taquirari'],
-        teacher: createTeacher(
+        teachers: [createTeacher(
           'Erlinda Medrano Z.',
           'Profesora principal',
           'Profesora de danza folclórica para repertorio adulto y trabajo escénico de temporada.',
           'assets/face.jpg',
-        ),
+        )],
         events: [boliviaMagicaEvent, melodiesEvent],
       }),
       createLevel({
@@ -311,12 +339,12 @@ export const kioskGroups: InterestGroup[] = [
           'Grupo orientado a presencia de escenario, repertorio exigente y montaje de cuadros para presentaciones institucionales.',
         schedules: createSchedules('Salón mayor', [['Sábado', '15:00 - 17:00']]),
         dances: ['Diablada', 'Kullawada', 'Cueca Tarijeña', 'Waca Waca'],
-        teacher: createTeacher(
+        teachers: [createTeacher(
           'Shanesia Ayaviri Vargas',
           'Profesora principal',
           'Instructora de danza enfocada en interpretación y proyección escénica de alto impacto.',
           'assets/face.jpg',
-        ),
+        )],
         events: [soledadEvent, bolivianitaEvent],
       }),
     ],
@@ -339,12 +367,12 @@ export const kioskGroups: InterestGroup[] = [
           'Módulo intensivo para fortalecer interpretación, entradas, cierres y lectura del escenario.',
         schedules: createSchedules('Foro principal', [['Sábado', '17:00 - 18:00']]),
         dances: ['Cueca Cochabambina', 'Cueca Tarijeña', 'Improvisación folclórica'],
-        teacher: createTeacher(
+        teachers: [createTeacher(
           'Yorgeli Ayaviri Vargas',
           'Facilitadora principal',
           'Instructora de danza con énfasis en escena, composición grupal y montaje breve.',
           'assets/face.jpg',
-        ),
+        )],
         events: [melodiesEvent, soledadEvent],
       }),
     ],

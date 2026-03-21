@@ -13,10 +13,12 @@ export interface ScheduleSlot {
 }
 
 export interface Teacher {
+  id?: string;
   name: string;
   role: string;
   bio: string;
   portrait: string;
+  isMain?: boolean;
 }
 
 export interface EventMediaAsset {
@@ -46,7 +48,7 @@ export interface GroupLevel {
   description: string;
   schedules: ScheduleSlot[];
   dances: string[];
-  teacher: Teacher;
+  teachers: Teacher[];
   events: LevelEvent[];
 }
 

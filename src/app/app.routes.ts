@@ -21,6 +21,9 @@ export const routes: Routes = [
       import('./kiosk-demo/pages/group-selection/group-selection-page.component').then(
         (module) => module.GroupSelectionPageComponent,
       ),
+      // import('./main-menu/pages/clases-page/clases-page.component').then(
+      //   (module) => module.ClasesPageComponent,
+      // ),
   },
   {
     path: 'kiosk/grupos/:groupId/niveles',
