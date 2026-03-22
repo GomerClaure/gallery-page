@@ -53,7 +53,7 @@ export class GroupDetailPageComponent {
   }
 
   protected goBack(): void {
-    void this.router.navigate(['/kiosk/grupos', this.group.id, 'niveles']);
+    void this.router.navigate(['/grupos', this.group.id, 'niveles']);
   }
 
   protected setTab(tab: DetailTab): void {
@@ -68,7 +68,7 @@ export class GroupDetailPageComponent {
 
   protected openEvent(eventId: string): void {
     void this.router.navigate([
-      '/kiosk/grupos',
+      '/grupos',
       this.group.id,
       'niveles',
       this.level.id,

@@ -44,4 +44,13 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal de selección de rama -->
+  @if (showBranchSelector()) {
+    <app-branch-selector-modal
+      (onClose)="closeBranchSelector()"
+      (onBranchSelected)="onBranchSelected()"
+    />
+  }
 </section>
+

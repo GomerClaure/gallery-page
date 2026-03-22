@@ -19,6 +19,34 @@
       linear-gradient(180deg, #fbf5ec 0%, #f7efe2 52%, #f1e1d0 100%);
     color: #292524;
     font-family: var(--font-sans);
+
+    /* Paleta de colores moderna */
+    --color-primary: #004d80;
+    --color-primary-light: #0066b3;
+    --color-primary-dark: #003555;
+
+    --color-secondary: #007c91;
+    --color-secondary-light: #0099b8;
+    --color-secondary-dark: #005967;
+
+    --color-tertiary: #e53935;
+    --color-tertiary-light: #ef5350;
+    --color-tertiary-dark: #c62828;
+
+    --color-neutral-50: #f9fafb;
+    --color-neutral-100: #f3f4f6;
+    --color-neutral-200: #e5e7eb;
+    --color-neutral-300: #d1d5db;
+    --color-neutral-400: #9ca3af;
+    --color-neutral-500: #6b7280;
+    --color-neutral-600: #4b5563;
+    --color-neutral-700: #374151;
+    --color-neutral-800: #1f2937;
+    --color-neutral-900: #111827;
+
+    --color-text-primary: #1a1a1a;
+    --color-text-secondary: #666666;
+    --color-text-light: #999999;
   }
 
   * {

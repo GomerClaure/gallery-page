@@ -7,16 +7,19 @@ import {
   signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 import {
   ImageSlide,
   ImageSwiperComponent,
 } from '../../shared/components/image-swiper/image-swiper.component';
+import { BranchSelectorModalComponent } from '../../kiosk-demo/components/branch-selector-modal/branch-selector-modal.component';
+import { AcademyContentService } from '../../kiosk-demo/services/academy-content.service';
 
 @Component({
   selector: 'app-screen-saver-page',
   standalone: true,
-  imports: [ImageSwiperComponent],
+  imports: [CommonModule, ImageSwiperComponent, BranchSelectorModalComponent],
   templateUrl: './screen-saver-page.html',
   styleUrl: './screen-saver-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,6 +27,7 @@ import {
 export class ScreenSaverPage {
   private readonly router = inject(Router);
   private readonly hostElement = inject(ElementRef<HTMLElement>);
+  private readonly contentService = inject(AcademyContentService);
 
   protected readonly slides = signal<ImageSlide[]>([
     {
@@ -58,6 +62,8 @@ export class ScreenSaverPage {
     },
   ]);
 
+  protected readonly showBranchSelector = signal(false);
+
   constructor() {
     afterNextRender(() => {
       const screenSaverElement = this.hostElement.nativeElement.querySelector(
@@ -69,7 +75,20 @@ export class ScreenSaverPage {
   }
 
   protected openMenu(): void {
-    void this.router.navigateByUrl('/kiosk');
+    if (this.contentService.isBranchSelected()) {
+      void this.router.navigateByUrl('/menu');
+    } else {
+      this.showBranchSelector.set(true);
+    }
+  }
+
+  protected closeBranchSelector(): void {
+    this.showBranchSelector.set(false);
+  }
+
+  protected onBranchSelected(): void {
+    this.showBranchSelector.set(false);
+    void this.router.navigateByUrl('/menu');
   }
 
   protected openMenuFromKeyboard(event: KeyboardEvent): void {

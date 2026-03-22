@@ -1,0 +1,75 @@
+<app-screen-container
+  [compact]="false"
+  [idleMs]="30000"
+  appIdleReturnHome
+  appIdleReturnTarget="/"
+>
+  <!-- Header con controles -->
+  <div class="menu-header">
+    <div class="header-top">
+      <div class="left-controls">
+        <app-back-button (pressed)="goBack()" />
+      </div>
+
+      <div class="logo-section">
+        <img src="assets/logo-bafott.png" alt="BAFOTT" class="logo" />
+      </div>
+
+      <div class="right-controls">
+        <button
+          class="btn-icon"
+          (click)="openBranchSelector()"
+          title="Cambiar sucursal"
+          aria-label="Cambiar sucursal"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
+            />
+          </svg>
+        </button>
+
+        <button
+          class="btn-icon btn-help"
+          title="Ayuda"
+          aria-label="Ayuda"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Nombre de sucursal discreto -->
+    @if (content.selectedBranch(); as branch) {
+      <div class="branch-indicator">
+        Sucursal: <span class="branch-name">{{ branch.name }}</span>
+      </div>
+    }
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="menu-content">
+    <h2 class="menu-title">¿En qué grupo estás interesado?</h2>
+
+    <!-- Grid de grupos en layout zigzag -->
+    <div class="groups-container zigzag-layout">
+      @for (group of content.groups(); track group.id) {
+        <div class="group-card-wrapper">
+          <app-group-card [group]="group" (selected)="openLevels($event)" />
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Modal de selección de rama -->
+  @if (showBranchSelector()) {
+    <app-branch-selector-modal
+      (onClose)="closeBranchSelector()"
+      (onBranchSelected)="onBranchSelected()"
+    />
+  }
+</app-screen-container>

@@ -26,10 +26,10 @@ export class GroupLevelsPageComponent {
   }
 
   protected goBack(): void {
-    void this.router.navigateByUrl('/kiosk/grupos');
+    void this.router.navigateByUrl('/menu');
   }
 
   protected openLevel(levelId: string): void {
-    void this.router.navigate(['/kiosk/grupos', this.group.id, 'niveles', levelId]);
+    void this.router.navigate(['/grupos', this.group.id, 'niveles', levelId]);
   }
 }

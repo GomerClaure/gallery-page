@@ -23,13 +23,17 @@ export class WelcomePageComponent {
   protected readonly branchModalOpen = signal(!this.content.selectedBranch());
   protected readonly shouldShowModal = computed(() => this.branchModalOpen());
 
-  protected selectBranch(branchId: string): void {
-    this.content.selectBranch(branchId);
+  protected closeBranchSelector(): void {
+    this.branchModalOpen.set(false);
+  }
+
+  protected onBranchSelected(): void {
+    this.branchModalOpen.set(false);
+    void this.router.navigateByUrl('/menu');
   }
 
   protected openGroups(): void {
     this.content.ensureBranchSelected();
-    this.branchModalOpen.set(false);
-    void this.router.navigateByUrl('/kiosk/grupos');
+    void this.router.navigateByUrl('/menu');
   }
 }

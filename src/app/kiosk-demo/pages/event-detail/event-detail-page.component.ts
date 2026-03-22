@@ -61,7 +61,7 @@ export class EventDetailPageComponent {
   }
 
   protected goBack(): void {
-    void this.router.navigate(['/kiosk/grupos', this.group.id, 'niveles', this.level.id], {
+    void this.router.navigate(['/grupos', this.group.id, 'niveles', this.level.id], {
       queryParams: { tab: 'gallery' },
     });
   }
