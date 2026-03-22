@@ -1,9 +1,9 @@
 <div
-  class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-3 backdrop-blur-[4px] sm:p-4"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/45 p-3 sm:p-4"
   (click)="closeModal()"
 >
   <div
-    class="flex h-[min(92vh,760px)] w-full max-w-[760px] flex-col overflow-hidden rounded-[28px] bg-[#FFFFFF] shadow-[0_20px_60px_rgba(0,124,145,0.18)]"
+    class="flex h-[min(92vh,760px)] w-full max-w-[760px] flex-col overflow-hidden rounded-[28px] bg-[#FFFFFF] shadow-[0_12px_32px_rgba(0,124,145,0.14)]"
     (click)="$event.stopPropagation()"
   >
     <!-- Header -->
@@ -11,7 +11,7 @@
       <div class="grid grid-cols-[44px_1fr_44px] items-center gap-2">
         <button
           type="button"
-          class="flex h-11 w-11 items-center justify-center rounded-full bg-slate-100 text-[20px] font-semibold text-[#1A1A1A] transition hover:scale-105 hover:bg-[#E53935] hover:text-white active:scale-100"
+          class="flex h-11 w-11 items-center justify-center rounded-full bg-slate-100 text-[20px] font-semibold text-[#1A1A1A] transition-colors duration-100 motion-reduce:transition-none hover:bg-[#E53935] hover:text-white"
           (click)="closeModal()"
           title="Cerrar"
           aria-label="Cerrar modal"
@@ -49,12 +49,12 @@
 
     <!-- Body -->
     <div class="flex min-h-0 flex-1 flex-col bg-[#F4FAFC]">
-      <div class="min-h-0 flex-1 overflow-y-auto px-3 py-3 sm:px-4 sm:py-4">
+      <div class="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 py-3 sm:px-4 sm:py-4">
         <div class="grid grid-cols-1 gap-3 sm:gap-4">
           @for (branch of branches(); track branch.id) {
             <button
               type="button"
-              class="grid w-full grid-cols-[1fr_auto] items-start gap-3 rounded-[20px] border-2 bg-white p-4 text-left transition-[background-color,border-color] duration-150 sm:p-5"
+              class="grid w-full grid-cols-[1fr_auto] items-start gap-3 rounded-[20px] border-2 bg-white p-4 text-left transition-colors duration-100 motion-reduce:transition-none sm:p-5"
               [ngClass]="selectedBranchId() === branch.id
                 ? 'border-cyan-600 bg-cyan-50'
                 : 'border-slate-200 bg-white hover:border-cyan-400'"
@@ -75,7 +75,7 @@
               </div>
 
               <span
-                class="mt-0.5 flex h-8 w-8 min-w-8 items-center justify-center rounded-full border-2 border-cyan-600 text-sm font-extrabold transition-[background-color,color] duration-100"
+                class="mt-0.5 flex h-8 w-8 min-w-8 items-center justify-center rounded-full border-2 border-cyan-600 text-sm font-extrabold transition-colors duration-75 motion-reduce:transition-none"
                 [ngClass]="selectedBranchId() === branch.id
                   ? 'bg-cyan-600 text-white'
                   : 'bg-white text-cyan-600'"
@@ -93,7 +93,7 @@
       <div class="border-t border-black/5 bg-white p-3 sm:p-4">
         <button
           type="button"
-          class="flex h-14 w-full items-center justify-center rounded-[18px] bg-[#00A8CC] px-5 text-base font-bold text-white shadow-[0_12px_24px_rgba(0,168,204,0.28)] transition hover:bg-[#007C91] active:scale-[0.99] disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
+          class="flex h-14 w-full items-center justify-center rounded-[18px] bg-[#00A8CC] px-5 text-base font-bold text-white shadow-[0_8px_16px_rgba(0,168,204,0.22)] transition-colors duration-100 motion-reduce:transition-none hover:bg-[#007C91] disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
           [disabled]="!selectedBranchId()"
           (click)="confirmSelection()"
         >
