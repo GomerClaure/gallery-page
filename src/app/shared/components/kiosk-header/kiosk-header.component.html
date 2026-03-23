@@ -1,0 +1,44 @@
+<header class="kiosk-header-topbar">
+  <div class="kiosk-header-back-slot">
+    @if (showBackButton()) {
+      <app-back-button (pressed)="onBackPress()" />
+    }
+  </div>
+
+  <div class="kiosk-header-logo-slot">
+    <img
+      [src]="logoSrc()"
+      alt="Logo principal"
+      class="kiosk-header-logo"
+    />
+  </div>
+
+  <div class="kiosk-header-actions-slot">
+    @if (pillLabel() || pillValue()) {
+      <div class="kiosk-header-pill">
+        @if (pillLabel()) {
+          <span class="kiosk-header-pill-label">{{ pillLabel() }}</span>
+        }
+        @if (pillValue()) {
+          <span class="kiosk-header-pill-name">{{ pillValue() }}</span>
+        }
+      </div>
+    }
+    <ng-content select="[header-actions]"></ng-content>
+  </div>
+</header>
+
+<div class="kiosk-header-title-wrap">
+  <h1 class="kiosk-header-title">
+    {{ title() }}
+    @if (titleAccent()) {
+      <span class="kiosk-header-title-accent">{{ titleAccent() }}</span>
+    }
+  </h1>
+
+  @if (subtitle()) {
+    <p class="kiosk-header-subtitle">
+      {{ subtitle() }}
+    </p>
+  }
+</div>

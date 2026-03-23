@@ -57,4 +57,14 @@ export class AcademyContentService {
   getEvent(groupId: string, levelId: string, eventId: string): LevelEvent | undefined {
     return this.getLevel(groupId, levelId)?.events.find((event) => event.id === eventId);
   }
+
+  getScreenSaverSlides(): { src: string; alt: string; badge: string }[] {
+    // Retornar slides de la sucursal seleccionada actual
+    const branch = this.selectedBranch();
+    if (branch?.slides?.length) {
+      return branch.slides;
+    }
+    // Si no hay sucursal seleccionada al inicio, tomar la de Heroínas por defecto
+    return this.branches()[0]?.slides || [];
+  }
 }

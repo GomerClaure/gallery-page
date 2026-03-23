@@ -38,6 +38,11 @@ export class KioskWorkerAdapterService {
       city: this.extractCity(dto.address),
       address: dto.address ?? 'Dirección pendiente',
       note: dto.description ?? 'Sucursal activa en el catálogo BAFOTT.',
+      slides: dto.slides?.map((slide) => ({
+        src: slide.src,
+        alt: slide.alt ?? 'Imagen de sucursal',
+        badge: slide.badge ?? '',
+      })) ?? [],
     };
   }
 

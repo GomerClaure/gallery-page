@@ -4,6 +4,7 @@ export interface Branch {
   city: string;
   address: string;
   note: string;
+  slides: { src: string; alt: string; badge: string }[];
 }
 
 export interface ScheduleSlot {

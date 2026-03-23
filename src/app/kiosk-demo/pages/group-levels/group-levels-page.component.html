@@ -5,59 +5,62 @@
   appIdleReturnHome
   appIdleReturnTarget="/"
 >
-  <section
-    class="group-levels-shell"
-    [style.--group-cover-image]="group.coverImage ? 'url(' + group.coverImage + ')' : 'none'"
-  >
-    <div class="group-levels-bg" aria-hidden="true"></div>
-    <div class="group-levels-vignette" aria-hidden="true"></div>
+  <section class="group-levels-shell">
+    
+    <header 
+      class="group-levels-banner" 
+      [style.--group-cover-image]="group.coverImage ? 'url(' + group.coverImage + ')' : 'none'"
+    >
+      <div class="group-levels-bg" aria-hidden="true"></div>
+      <div class="group-levels-vignette" aria-hidden="true"></div>
 
-    <header class="group-levels-topbar">
-      <div class="group-levels-back-slot">
-        <app-back-button (pressed)="goBack()" />
-      </div>
-
-      <div class="group-levels-logo-slot">
-        <img
-          src="assets/logo-bafott.png"
-          alt="BAFOTT"
-          class="group-levels-logo"
-        />
-      </div>
-
-      <div class="group-levels-actions-slot">
-        <div class="group-levels-pill">
-          <span class="group-levels-pill-label">Grupo</span>
-          <span class="group-levels-pill-name">{{ group.name }}</span>
+      <div class="group-levels-topbar">
+        <div class="group-levels-back-slot">
+          <app-back-button (pressed)="goBack()" />
         </div>
+
+        <div class="group-levels-logo-slot">
+          <img
+            src="assets/logo-bafott.png"
+            alt="BAFOTT"
+            class="group-levels-logo"
+          />
+        </div>
+
+        <div class="group-levels-actions-slot">
+          <div class="group-levels-pill">
+            <span class="group-levels-pill-label">Grupo</span>
+            <span class="group-levels-pill-name">{{ group.name }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="group-levels-title-wrap">
+        <h1 class="group-levels-title">
+          Nuestros niveles disponibles
+          <span class="group-levels-title-accent">· {{ group.name }}</span>
+        </h1>
+
+        @if (group.description) {
+          <p class="group-levels-subtitle">
+            {{ group.description }}
+          </p>
+        }
+      </div>
+
+      <div class="group-levels-bottom-accent" aria-hidden="true">
+        <div class="group-levels-accent-red"></div>
+        <div class="group-levels-accent-yellow"></div>
+        <div class="group-levels-accent-green"></div>
       </div>
     </header>
 
-    <div class="group-levels-title-wrap">
-      <h1 class="group-levels-title">
-        Nuestros niveles disponibles
-        <span class="group-levels-title-accent">· {{ group.name }}</span>
-      </h1>
+    <section class="group-levels-content">
+       <app-levels-slider
+        [levels]="group.levels"
+        (levelSelected)="openLevel($event)"
+      />
+    </section>
 
-      @if (group.description) {
-        <p class="group-levels-subtitle">
-          {{ group.description }}
-        </p>
-      }
-    </div>
-
-
-    <div class="group-levels-bottom-accent" aria-hidden="true">
-      <div class="group-levels-accent-red"></div>
-      <div class="group-levels-accent-yellow"></div>
-      <div class="group-levels-accent-green"></div>
-    </div>
-  </section>
-
-  <section class="group-levels-content">
-     <app-levels-slider
-      [levels]="group.levels"
-      (levelSelected)="openLevel($event)"
-    />
   </section>
 </app-screen-container>

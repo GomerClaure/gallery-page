@@ -79,11 +79,12 @@ const imagePool = [
   'assets/main-menu/infantil1.jpg',
   'assets/main-menu/prejuvenil1.jpg',
   'assets/main-menu/juvenil.jpg',
-  'assets/main-menu/juvenil1.jpeg',
+  'assets/main-menu/juvenil1.jpg',
   'assets/main-menu/mayores1.jpg',
   'assets/main-menu/mayores2.jpg',
   'assets/main-menu/mayores3.jpg',
 ];
+
 
 export const kioskBranches: Branch[] = [
   {
@@ -93,6 +94,24 @@ export const kioskBranches: Branch[] = [
     address:
       'Av. Heroínas entre 25 de Mayo y España, Edificio Colegio de Abogados, 1er piso',
     note: 'Sede activa para formación regular y atención del kiosco.',
+    slides: [
+      {
+        src: 'assets/screen-saver/img1.jpg',
+        alt: 'Estudiantes durante una clase de la academia',
+        badge: 'Clases',
+      },
+      {
+        src: 'assets/screen-saver/img2.jpg',
+        alt: 'Participantes en una presentacion academica',
+        badge: 'Presentaciones',
+      },
+      {
+        src: 'assets/screen-saver/img3.jpg',
+        alt: 'Imagen institucional de la academia',
+        badge: 'Institucional',
+      },
+    ],
+
   },
   {
     id: 'bafott-centro',
@@ -101,6 +120,24 @@ export const kioskBranches: Branch[] = [
     address:
       'Calle General Acha entre Baptista y Ayacucho, Galería Acha Planta Baja',
     note: 'Sucursal principal con mayor programación de presentaciones y eventos.',
+    slides: [
+      {
+        src: 'assets/screen-saver/img4.jpg',
+        alt: 'Actividad grupal en una clase',
+        badge: 'Formacion',
+      },
+      {
+        src: 'assets/screen-saver/img5.jpg',
+        alt: 'Momento destacado de una presentacion',
+        badge: 'Escenario',
+      },
+      {
+        src: 'assets/screen-saver/img6.jpg',
+        alt: 'Fotografia institucional con estudiantes',
+        badge: 'Comunidad',
+      },
+    ],
+
   },
   {
     id: 'bafott-sacaba',
@@ -109,6 +146,23 @@ export const kioskBranches: Branch[] = [
     address:
       'Calle Coronel Sánchez, frente al Banco Mercantil Santa Cruz, Edif. Famarci 2do piso',
     note: 'Sede con programación vacacional y clases de temporada.',
+    slides: [
+      {
+        src: 'assets/screen-saver/img7.jpg',
+        alt: 'Estudiantes durante una clase de la academia',
+        badge: 'Clases',
+      },
+      {
+        src: 'assets/screen-saver/img8.jpg',
+        alt: 'Participantes en una presentacion academica',
+        badge: 'Presentaciones',
+      },
+      {
+        src: 'assets/screen-saver/img9.jpg',
+        alt: 'Imagen institucional de la academia',
+        badge: 'Institucional',
+      },
+    ],
   },
 ];
 

@@ -36,48 +36,29 @@ export class LevelsSlicer implements AfterViewInit {
   readonly levels = input.required<GroupLevel[]>();
   readonly levelSelected = output<string>();
 
-  protected readonly swiperBreakpoints: SwiperOptions['breakpoints'] = {
-    0: {
-      slidesPerView: 1.14,
-      spaceBetween: 12,
-    },
-    480: {
-      slidesPerView: 1.28,
-      spaceBetween: 12,
-    },
-    768: {
-      slidesPerView: 1.8,
-      spaceBetween: 14,
-    },
-    1024: {
-      slidesPerView: 2.3,
-      spaceBetween: 16,
-    },
-    1320: {
-      slidesPerView: 2.8,
-      spaceBetween: 18,
-    },
-  };
-
   ngAfterViewInit(): void {
     const swiperElement = this.levelsSwiper().nativeElement;
     const totalLevels = this.levels().length;
     const hasManyLevels = totalLevels > 1;
-    const canLoop = totalLevels >= 4;
 
     const config: SwiperOptions = {
+      effect: 'coverflow',
+      coverflowEffect: {
+        rotate: 0,
+        stretch: -30,
+        depth: 180,
+        modifier: 2,
+        slideShadows: false,
+      },
       allowTouchMove: hasManyLevels,
       centeredSlides: true,
       grabCursor: hasManyLevels,
-      loop: canLoop,
-      resistanceRatio: 0.82,
+      loop: totalLevels >= 4,
       shortSwipes: true,
-      slideToClickedSlide: false,
-      slidesPerView: 1.14,
-      spaceBetween: 12,
+      slideToClickedSlide: true,
+      slidesPerView: 'auto',
       speed: 520,
       watchSlidesProgress: true,
-      breakpoints: this.swiperBreakpoints,
       keyboard: {
         enabled: true,
         onlyInViewport: true,
@@ -91,17 +72,12 @@ export class LevelsSlicer implements AfterViewInit {
     };
 
     this.zone.runOutsideAngular(() => {
-      if (typeof swiperElement.initialize !== 'function') {
-        return;
-      }
-
+      if (typeof swiperElement.initialize !== 'function') return;
       Object.assign(swiperElement, config);
-
       if (swiperElement.swiper) {
         swiperElement.swiper.update();
         return;
       }
-
       swiperElement.initialize();
     });
   }
