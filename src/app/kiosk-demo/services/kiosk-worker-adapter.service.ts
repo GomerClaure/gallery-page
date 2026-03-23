@@ -76,6 +76,9 @@ export class KioskWorkerAdapterService {
       dances: dto.dances.map((dance) => dance.name),
       teachers: this.toTeachers(dto.teachers),
       events: dto.events.map((event) => this.toLevelEvent(event)),
+      coverImage:
+        dto.coverImageUrl ??
+        'assets/main-menu/juvenil1.jpeg',
     };
   }
 

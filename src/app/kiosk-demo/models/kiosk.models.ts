@@ -50,6 +50,7 @@ export interface GroupLevel {
   dances: string[];
   teachers: Teacher[];
   events: LevelEvent[];
+  coverImage: string;
 }
 
 export interface InterestGroup {

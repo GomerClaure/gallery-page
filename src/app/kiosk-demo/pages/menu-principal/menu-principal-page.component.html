@@ -1,6 +1,6 @@
 <app-screen-container
   [compact]="false"
-  [idleMs]="30000"
+  [idleMs]="3000"
   variant="kiosk-clean"
   appIdleReturnHome
   appIdleReturnTarget="/"
@@ -62,6 +62,7 @@
             type="button"
             (click)="openLevels(group.id)"
             class="menu-card"
+            aria-label="Seleccionar grupo {{ group.name }}"
             [ngClass]="getStaggerClass(index)"
           >
             <div class="menu-card-media">
