@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-
 import { IdleReturnHomeDirective } from '../../../shared/directives/idle-return-home.directive';
 
 @Component({
@@ -14,5 +13,8 @@ export class ScreenContainerComponent {
   readonly title = input<string>('');
   readonly subtitle = input<string>('');
   readonly compact = input(false);
-  readonly idleMs = input(30000);
+  readonly idleMs = input(300000);
+
+  // nueva variante visual
+  readonly variant = input<'default' | 'kiosk-clean'>('default');
 }

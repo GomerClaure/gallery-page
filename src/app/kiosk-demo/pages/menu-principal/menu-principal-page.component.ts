@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { BackButtonComponent } from '../../components/back-button/back-button.component';
-import { GroupCardComponent } from '../../components/group-card/group-card.component';
 import { BranchSelectorModalComponent } from '../../components/branch-selector-modal/branch-selector-modal.component';
 import { ScreenContainerComponent } from '../../components/screen-container/screen-container.component';
 import { AcademyContentService } from '../../services/academy-content.service';
@@ -14,7 +13,6 @@ import { AcademyContentService } from '../../services/academy-content.service';
   imports: [
     CommonModule,
     BackButtonComponent,
-    GroupCardComponent,
     BranchSelectorModalComponent,
     ScreenContainerComponent,
   ],
@@ -45,5 +43,16 @@ export class MenuPrincipalPage {
 
   protected onBranchSelected(): void {
     this.showBranchSelector.set(false);
+  }
+
+  protected getStaggerClass(index: number): string {
+    const pattern = index % 6;
+
+    if (pattern === 0) return 'stagger-step-1';
+    if (pattern === 1) return 'stagger-step-2';
+    if (pattern === 2) return 'stagger-step-3';
+    if (pattern === 3) return 'stagger-step-4';
+    if (pattern === 4) return 'stagger-step-5';
+    return 'stagger-step-6';
   }
 }

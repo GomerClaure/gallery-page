@@ -14,24 +14,30 @@
   :root {
     color-scheme: light;
     --app-background:
-      radial-gradient(circle at top, rgba(251, 191, 36, 0.18), transparent 32%),
-      radial-gradient(circle at 85% 18%, rgba(251, 146, 60, 0.12), transparent 24%),
-      linear-gradient(180deg, #fbf5ec 0%, #f7efe2 52%, #f1e1d0 100%);
-    color: #292524;
+      radial-gradient(circle at 14% 18%, rgba(77, 208, 225, 0.18), transparent 24%),
+      radial-gradient(circle at 86% 22%, rgba(253, 216, 53, 0.14), transparent 18%),
+      linear-gradient(135deg, #f4fafc 0%, #eef9fc 46%, #e8f5fa 100%);
+    color: #1a1a1a;
     font-family: var(--font-sans);
 
-    /* Paleta de colores moderna */
-    --color-primary: #004d80;
-    --color-primary-light: #0066b3;
-    --color-primary-dark: #003555;
+    --color-primary: #00a8cc;
+    --color-primary-light: #4dd0e1;
+    --color-primary-dark: #007c91;
 
-    --color-secondary: #007c91;
-    --color-secondary-light: #0099b8;
-    --color-secondary-dark: #005967;
+    --color-secondary: #43a047;
+    --color-secondary-light: #66bb6a;
+    --color-secondary-dark: #2e7d32;
 
     --color-tertiary: #e53935;
     --color-tertiary-light: #ef5350;
     --color-tertiary-dark: #c62828;
+
+    --color-accent-red: #e53935;
+    --color-accent-yellow: #fdd835;
+    --color-accent-green: #43a047;
+
+    --color-background: #f4fafc;
+    --color-surface: #ffffff;
 
     --color-neutral-50: #f9fafb;
     --color-neutral-100: #f3f4f6;
@@ -56,7 +62,7 @@
   html,
   body {
     min-height: 100%;
-    background-color: #f7efe2;
+    background-color: var(--color-background);
   }
 
   body {
