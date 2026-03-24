@@ -45,8 +45,9 @@
     </section>
   </div>
 
-  <section class="relative mt-5 rounded-[2rem] border border-stone-200 bg-stone-50/70 p-5">
-    <app-event-media-gallery [media]="event.media" (videoSelected)="openVideo($event)" />
-    <app-video-modal [media]="activeVideo()" (closed)="closeVideo()" />
+  <section class="mt-5 rounded-[2rem] border border-stone-200 bg-stone-50/70 p-5">
+    <app-event-media-gallery [media]="event.media" (mediaSelected)="openMedia($event)" />
   </section>
+
+  <app-video-modal [media]="activeMedia()" (closed)="closeMedia()" />
 </app-screen-container>

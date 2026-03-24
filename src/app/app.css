@@ -1,4 +1,9 @@
 :host {
   display: block;
   min-height: 100dvh;
+  isolation: isolate;
+}
+
+.app-route-shell {
+  min-height: 100dvh;
 }

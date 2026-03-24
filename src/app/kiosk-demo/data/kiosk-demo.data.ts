@@ -9,7 +9,7 @@ import {
 } from '../models/kiosk.models';
 
 const sampleVideo =
-  'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4';
+  '../../assets/video/tobas.mp4';
 
 const createSchedules = (
   room: string,

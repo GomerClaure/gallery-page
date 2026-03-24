@@ -26,6 +26,7 @@ import { AcademyContentService } from '../../services/academy-content.service';
     TeacherCardComponent,
   ],
   templateUrl: './group-detail-page.component.html',
+  styleUrl: './group-detail-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GroupDetailPageComponent {
@@ -49,16 +50,21 @@ export class GroupDetailPageComponent {
     { id: 'schedule' as const, label: 'Horarios' },
     { id: 'gallery' as const, label: 'Galería' },
   ];
+  protected readonly disableTabAnimations = signal(false);
 
   constructor() {
     this.content.ensureBranchSelected();
   }
 
   protected goBack(): void {
-    void this.router.navigate(['/grupos', this.group.id, 'niveles']);
+    void this.navigateAway(['/grupos', this.group.id, 'niveles']);
   }
 
   protected setTab(tab: DetailTab): void {
+    if (this.activeTab() === tab) {
+      return;
+    }
+
     this.activeTab.set(tab);
     void this.router.navigate([], {
       relativeTo: this.route,
@@ -69,7 +75,7 @@ export class GroupDetailPageComponent {
   }
 
   protected openEvent(eventId: string): void {
-    void this.router.navigate([
+    void this.navigateAway([
       '/grupos',
       this.group.id,
       'niveles',
@@ -77,5 +83,15 @@ export class GroupDetailPageComponent {
       'eventos',
       eventId,
     ]);
+  }
+
+  private async navigateAway(commands: readonly string[]): Promise<void> {
+    this.disableTabAnimations.set(true);
+
+    const navigated = await this.router.navigate(commands);
+
+    if (!navigated) {
+      this.disableTabAnimations.set(false);
+    }
   }
 }

@@ -1,5 +1,5 @@
 <app-screen-container [compact]="true" variant="kiosk-clean">
-  <div class="mb-4 flex flex-wrap items-center justify-between gap-3 m-3">
+  <div class="m-3 mb-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
     <app-back-button (pressed)="goBack()" />
     <app-tab-navigation
       [tabs]="tabs"
@@ -13,67 +13,85 @@
       [branch]="content.selectedBranch()"
       [group]="group"
       [level]="level"
-      class="max-lg:w-full lg:h-full lg:overflow-y-auto hidden-scrollbar"
+      class="order-2 max-lg:w-full lg:order-1 lg:h-full lg:overflow-y-auto hidden-scrollbar"
     />
 
-    <section class="flex min-h-0 flex-col rounded-[2.5rem] border border-white/60 bg-white/40 backdrop-blur-3xl shadow-[0_8px_40px_rgb(0,0,0,0.04)] p-4 lg:p-6 relative overflow-hidden">
+    <section class="order-1 flex min-h-0 flex-col rounded-[2.5rem] border border-white/60 bg-white/40 p-4 shadow-[0_8px_40px_rgb(0,0,0,0.04)] backdrop-blur-3xl lg:order-2 lg:p-6 relative overflow-hidden">
       <!-- Premium ambient light -->
       <div class="pointer-events-none absolute -left-40 -top-40 h-96 w-96 rounded-full bg-amber-200/20 blur-3xl"></div>
       <div class="pointer-events-none absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-stone-200/40 blur-3xl"></div>
 
-      <div class="relative z-10 flex-1 overflow-y-auto hidden-scrollbar">
-        @if (activeTab() === 'info') {
-          <div class="flex flex-col h-full gap-5">
-            <article class="rounded-[1.75rem] border border-stone-200 bg-white p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] flex-shrink-0 relative overflow-hidden group transition-all hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.08)]">
-              <!-- Decorative background element -->
-              <div class="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gradient-to-br from-amber-500/10 to-transparent opacity-50 transition-transform duration-700 group-hover:scale-125"></div>
+      <div class="relative z-10 flex-1 min-h-0">
+        <div class="detail-tab-host h-full">
+          @if (activeTab() === 'info') {
+            <div
+              class="detail-tab-panel hidden-scrollbar flex h-full flex-col gap-5 overflow-y-auto"
+              [animate.enter]="disableTabAnimations() ? null : 'detail-panel-enter'"
+              [animate.leave]="disableTabAnimations() ? null : 'detail-panel-leave'"
+            >
+              <article class="rounded-[1.75rem] border border-stone-200 bg-white p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] flex-shrink-0 relative overflow-hidden group transition-all hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.08)]">
+                <!-- Decorative background element -->
+                <div class="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gradient-to-br from-amber-500/10 to-transparent opacity-50 transition-transform duration-700 group-hover:scale-125"></div>
 
-              <div class="relative z-10">
-                <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-stone-500 mb-2">
-                  Resumen del nivel
-                </p>
-                <div class="mt-2 flex flex-wrap items-center gap-3">
-                  <h3 class="text-3xl lg:text-4xl font-black tracking-tight bg-gradient-to-r from-stone-900 via-stone-700 to-stone-800 bg-clip-text text-transparent">{{ level.name }}</h3>
+                <div class="relative z-10">
+                  <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-stone-500 mb-2">
+                    Resumen del nivel
+                  </p>
+                  <div class="mt-2 flex flex-wrap items-center gap-3">
+                    <h3 class="text-3xl lg:text-4xl font-black tracking-tight bg-gradient-to-r from-stone-900 via-stone-700 to-stone-800 bg-clip-text text-transparent">{{ level.name }}</h3>
 
-                  <div class="flex gap-2 ml-auto lg:ml-0">
-                    <span class="rounded-full bg-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-stone-600 ring-1 ring-inset ring-stone-200 shadow-sm">
-                      {{ group.name }}
-                    </span>
-                    <span class="rounded-full bg-amber-50 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-amber-700 ring-1 ring-inset ring-amber-200/60 shadow-sm">
-                      {{ content.selectedBranch()?.name ?? 'Sucursal activa' }}
-                    </span>
+                    <div class="flex gap-2 ml-auto lg:ml-0">
+                      <span class="rounded-full bg-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-stone-600 ring-1 ring-inset ring-stone-200 shadow-sm">
+                        {{ group.name }}
+                      </span>
+                      <span class="rounded-full bg-amber-50 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-amber-700 ring-1 ring-inset ring-amber-200/60 shadow-sm">
+                        {{ content.selectedBranch()?.name ?? 'Sucursal activa' }}
+                      </span>
+                    </div>
                   </div>
+                  <div class="mt-5 h-[2px] w-12 bg-amber-400/40 rounded-full"></div>
+                  <p class="mt-4 max-w-3xl text-[15px] leading-relaxed text-stone-600 font-medium">
+                    {{ level.description }}
+                  </p>
                 </div>
-                <div class="mt-5 h-[2px] w-12 bg-amber-400/40 rounded-full"></div>
-                <p class="mt-4 max-w-3xl text-[15px] leading-relaxed text-stone-600 font-medium">
-                  {{ level.description }}
-                </p>
+              </article>
+
+              <div class="flex-1 min-h-[220px]">
+                <app-dance-tag-list [dances]="level.dances" class="block h-full" />
               </div>
-            </article>
-
-            <div class="flex-1 min-h-[220px]">
-              <app-dance-tag-list [dances]="level.dances" class="h-full block fade-in-section" />
             </div>
-          </div>
-        }
+          }
 
-        @if (activeTab() === 'schedule') {
-          <div class="h-full fade-in-section">
-            <app-schedule-card [schedules]="level.schedules" class="h-full block" />
-          </div>
-        }
+          @if (activeTab() === 'schedule') {
+            <div
+              class="detail-tab-panel hidden-scrollbar h-full overflow-y-auto"
+              [animate.enter]="disableTabAnimations() ? null : 'detail-panel-enter'"
+              [animate.leave]="disableTabAnimations() ? null : 'detail-panel-leave'"
+            >
+              <app-schedule-card [schedules]="level.schedules" class="h-full block" />
+            </div>
+          }
 
-        @if (activeTab() === 'teachers') {
-          <div class="h-full fade-in-section">
-            <app-teacher-card [teachers]="level.teachers" class="h-full block" />
-          </div>
-        }
+          @if (activeTab() === 'teachers') {
+            <div
+              class="detail-tab-panel hidden-scrollbar h-full overflow-y-auto"
+              [animate.enter]="disableTabAnimations() ? null : 'detail-panel-enter'"
+              [animate.leave]="disableTabAnimations() ? null : 'detail-panel-leave'"
+            >
+              <app-teacher-card [teachers]="level.teachers" class="h-full block" />
+            </div>
+          }
 
-        @if (activeTab() === 'gallery') {
-          <div class="h-full fade-in-section relative">
-            <app-media-grid [events]="level.events" (eventSelected)="openEvent($event)" class="h-full block" />
-          </div>
-        }
+          @if (activeTab() === 'gallery') {
+            <div
+              class="detail-tab-panel hidden-scrollbar relative h-full overflow-y-auto"
+              [animate.enter]="disableTabAnimations() ? null : 'detail-panel-enter'"
+              [animate.leave]="disableTabAnimations() ? null : 'detail-panel-leave'"
+            >
+              <app-media-grid [events]="level.events" (eventSelected)="openEvent($event)" class="h-full block" />
+            </div>
+          }
+        </div>
       </div>
     </section>
   </div>

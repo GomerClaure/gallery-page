@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.tab-navigation {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  background: rgb(245 245 244 / 0.95);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tab-navigation::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-button {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  :host {
+    width: auto;
+    max-width: 100%;
+  }
+
+  .tab-navigation {
+    display: inline-flex;
+    width: auto;
+    max-width: 100%;
+  }
+}
