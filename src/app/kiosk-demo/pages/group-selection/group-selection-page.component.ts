@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { BackButtonComponent } from '../../components/back-button/back-button.component';
 import { BranchSelectorModalComponent } from '../../components/branch-selector-modal/branch-selector-modal.component';
+import { ContactModalComponent } from '../../components/contact-modal/contact-modal.component';
 import { GroupCardComponent } from '../../components/group-card/group-card.component';
 import { ScreenContainerComponent } from '../../components/screen-container/screen-container.component';
 import { AcademyContentService } from '../../services/academy-content.service';
@@ -13,6 +14,7 @@ import { AcademyContentService } from '../../services/academy-content.service';
   imports: [
     BackButtonComponent,
     BranchSelectorModalComponent,
+    ContactModalComponent,
     GroupCardComponent,
     ScreenContainerComponent,
   ],
@@ -24,6 +26,7 @@ export class GroupSelectionPageComponent {
   private readonly router = inject(Router);
   protected readonly content = inject(AcademyContentService);
   protected readonly showBranchSelector = signal(false);
+  protected readonly showContactModal = signal(false);
 
   constructor() {
     this.content.ensureBranchSelected();
@@ -43,6 +46,14 @@ export class GroupSelectionPageComponent {
 
   protected closeBranchSelector(): void {
     this.showBranchSelector.set(false);
+  }
+
+  protected openContactModal(): void {
+    this.showContactModal.set(true);
+  }
+
+  protected closeContactModal(): void {
+    this.showContactModal.set(false);
   }
 
   protected onBranchSelected(): void {

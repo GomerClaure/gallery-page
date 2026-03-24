@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 
 import { LevelEvent } from '../../models/kiosk.models';
 
@@ -11,6 +11,7 @@ import { LevelEvent } from '../../models/kiosk.models';
 export class MediaGridComponent {
   readonly events = input.required<LevelEvent[]>();
   readonly eventSelected = output<string>();
+  readonly hasHorizontalScroll = computed(() => this.events().length > 1);
 
   protected photoCount(event: LevelEvent): number {
     return event.media.filter((item) => item.type === 'image').length;

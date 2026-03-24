@@ -1,0 +1,55 @@
+<div class="contact-modal-backdrop" (click)="closeModal()">
+  <div class="contact-modal-panel" (click)="$event.stopPropagation()">
+    <div class="contact-modal-header">
+      <button
+        type="button"
+        class="contact-modal-close"
+        (click)="closeModal()"
+        aria-label="Cerrar modal de contacto"
+        title="Cerrar"
+      >
+        ✕
+      </button>
+
+      <img
+        src="assets/logo-bafott.png"
+        alt="BAFOTT"
+        class="contact-modal-logo"
+      />
+    </div>
+
+    <div class="contact-modal-body">
+      <span class="contact-modal-badge">Contacto</span>
+
+      <div class="contact-modal-content">
+        <div class="contact-modal-copy-block">
+          <h2 class="contact-modal-title">Escanea o escribe por WhatsApp</h2>
+
+          <p class="contact-modal-copy">
+            Si necesitas ayuda, información o atención directa, usa este código QR o entra al chat.
+          </p>
+
+          <p class="contact-modal-number">WhatsApp: 74837175</p>
+
+          <a
+            class="contact-modal-action"
+            [href]="whatsappUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Abrir chat de WhatsApp"
+          >
+            Ir al chat de WhatsApp
+          </a>
+        </div>
+
+        <div class="contact-modal-qr-shell">
+          <img
+            [src]="qrImageSrc"
+            alt="Código QR para abrir WhatsApp"
+            class="contact-modal-qr"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

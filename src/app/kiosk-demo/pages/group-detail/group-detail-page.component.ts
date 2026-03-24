@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { BackButtonComponent } from '../../components/back-button/back-button.component';
@@ -37,10 +37,10 @@ export class GroupDetailPageComponent {
   private readonly groupId = this.route.snapshot.paramMap.get('groupId') ?? '';
   private readonly levelId = this.route.snapshot.paramMap.get('levelId') ?? '';
 
-  protected readonly group =
-    this.content.getGroup(this.groupId) ?? this.content.groups()[0];
-  protected readonly level =
-    this.content.getLevel(this.groupId, this.levelId) ?? this.group.levels[0];
+  protected readonly group = computed(() => this.content.getGroup(this.groupId) ?? null);
+  protected readonly level = computed(
+    () => this.group()?.levels.find((level) => level.id === this.levelId) ?? null,
+  );
   protected readonly activeTab = signal<DetailTab>(
     (this.route.snapshot.queryParamMap.get('tab') as DetailTab | null) ?? 'info',
   );
@@ -57,7 +57,13 @@ export class GroupDetailPageComponent {
   }
 
   protected goBack(): void {
-    void this.navigateAway(['/grupos', this.group.id, 'niveles']);
+    const group = this.group();
+    if (!group) {
+      void this.router.navigateByUrl('/menu');
+      return;
+    }
+
+    void this.navigateAway(['/grupos', group.id, 'niveles']);
   }
 
   protected setTab(tab: DetailTab): void {
@@ -75,11 +81,17 @@ export class GroupDetailPageComponent {
   }
 
   protected openEvent(eventId: string): void {
+    const group = this.group();
+    const level = this.level();
+    if (!group || !level) {
+      return;
+    }
+
     void this.navigateAway([
       '/grupos',
-      this.group.id,
+      group.id,
       'niveles',
-      this.level.id,
+      level.id,
       'eventos',
       eventId,
     ]);

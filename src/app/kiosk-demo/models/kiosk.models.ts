@@ -5,6 +5,7 @@ export interface Branch {
   address: string;
   note: string;
   slides: { src: string; alt: string; badge: string }[];
+  availableGroupIds?: string[];
 }
 
 export interface ScheduleSlot {

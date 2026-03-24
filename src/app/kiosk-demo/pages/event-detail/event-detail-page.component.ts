@@ -31,16 +31,16 @@ export class EventDetailPageComponent {
   private readonly levelId = this.route.snapshot.paramMap.get('levelId') ?? '';
   private readonly eventId = this.route.snapshot.paramMap.get('eventId') ?? '';
 
-  protected readonly group =
-    this.content.getGroup(this.groupId) ?? this.content.groups()[0];
-  protected readonly level =
-    this.content.getLevel(this.groupId, this.levelId) ?? this.group.levels[0];
-  protected readonly event =
-    this.content.getEvent(this.groupId, this.levelId, this.eventId) ??
-    this.level.events[0];
+  protected readonly group = computed(() => this.content.getGroup(this.groupId) ?? null);
+  protected readonly level = computed(
+    () => this.group()?.levels.find((level) => level.id === this.levelId) ?? null,
+  );
+  protected readonly event = computed(
+    () => this.level()?.events.find((event) => event.id === this.eventId) ?? null,
+  );
   protected readonly activeMedia = signal<EventMediaAsset | null>(null);
   protected readonly heroSlides = computed<ImageSlide[]>(() =>
-    this.event.media
+    (this.event()?.media ?? [])
       .filter((item) => item.type === 'image')
       .slice(0, 4)
       .map((item) => ({
@@ -50,10 +50,10 @@ export class EventDetailPageComponent {
       })),
   );
   protected readonly photoCount = computed(
-    () => this.event.media.filter((item) => item.type === 'image').length,
+    () => this.event()?.media.filter((item) => item.type === 'image').length ?? 0,
   );
   protected readonly videoCount = computed(
-    () => this.event.media.filter((item) => item.type === 'video').length,
+    () => this.event()?.media.filter((item) => item.type === 'video').length ?? 0,
   );
 
   constructor() {
@@ -61,7 +61,14 @@ export class EventDetailPageComponent {
   }
 
   protected goBack(): void {
-    void this.router.navigate(['/grupos', this.group.id, 'niveles', this.level.id], {
+    const group = this.group();
+    const level = this.level();
+    if (!group || !level) {
+      void this.router.navigateByUrl('/menu');
+      return;
+    }
+
+    void this.router.navigate(['/grupos', group.id, 'niveles', level.id], {
       queryParams: { tab: 'gallery' },
     });
   }

@@ -9,11 +9,22 @@ export class AcademyContentService {
   private readonly selectedBranchId = signal<string | null>(null);
 
   readonly branches = signal<Branch[]>(kioskBranches);
-  readonly groups = signal<InterestGroup[]>(kioskGroups);
+  readonly allGroups = signal<InterestGroup[]>(kioskGroups);
   readonly selectedBranch = computed(
     () =>
       this.branches().find((branch) => branch.id === this.selectedBranchId()) ?? null,
   );
+  readonly groups = computed(() => {
+    const selectedBranch = this.selectedBranch();
+    const groups = this.allGroups();
+    const availableGroupIds = selectedBranch?.availableGroupIds;
+
+    if (!availableGroupIds?.length) {
+      return groups;
+    }
+
+    return groups.filter((group) => availableGroupIds.includes(group.id));
+  });
 
   constructor(private branchStorageService: BranchStorageService) {
     this.initializeFromStorage();

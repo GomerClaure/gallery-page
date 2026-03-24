@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { BackButtonComponent } from '../../components/back-button/back-button.component';
 import { BranchSelectorModalComponent } from '../../components/branch-selector-modal/branch-selector-modal.component';
+import { ContactModalComponent } from '../../components/contact-modal/contact-modal.component';
 import { ScreenContainerComponent } from '../../components/screen-container/screen-container.component';
 import { AcademyContentService } from '../../services/academy-content.service';
 
@@ -14,6 +15,7 @@ import { AcademyContentService } from '../../services/academy-content.service';
     CommonModule,
     BackButtonComponent,
     BranchSelectorModalComponent,
+    ContactModalComponent,
     ScreenContainerComponent,
   ],
   templateUrl: './menu-principal-page.component.html',
@@ -24,6 +26,7 @@ export class MenuPrincipalPage {
   private readonly router = inject(Router);
   protected readonly content = inject(AcademyContentService);
   protected readonly showBranchSelector = signal(false);
+  protected readonly showContactModal = signal(false);
 
   protected openLevels(groupId: string): void {
     void this.router.navigate(['/grupos', groupId, 'niveles']);
@@ -39,6 +42,14 @@ export class MenuPrincipalPage {
 
   protected closeBranchSelector(): void {
     this.showBranchSelector.set(false);
+  }
+
+  protected openContactModal(): void {
+    this.showContactModal.set(true);
+  }
+
+  protected closeContactModal(): void {
+    this.showContactModal.set(false);
   }
 
   protected onBranchSelected(): void {

@@ -127,6 +127,41 @@
   gap: clamp(0.72rem, 1.45vh, 1rem);
 }
 
+.group-selection-empty {
+  width: min(100%, 40rem);
+  padding: 1.35rem 1.25rem;
+  border: 1px solid rgba(0, 168, 204, 0.14);
+  border-radius: 1.75rem;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.06);
+  text-align: center;
+}
+
+.group-selection-empty-eyebrow {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.group-selection-empty-title {
+  margin: 0.7rem 0 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2vw, 1.9rem);
+  font-weight: 800;
+  line-height: 1.08;
+}
+
+.group-selection-empty-copy {
+  margin: 0.75rem 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.96rem;
+  line-height: 1.5;
+}
+
 .group-selection-row {
   width: min(100%, 56rem);
 }

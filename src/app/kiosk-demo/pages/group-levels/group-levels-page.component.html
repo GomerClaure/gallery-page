@@ -6,61 +6,72 @@
   appIdleReturnTarget="/"
 >
   <section class="group-levels-shell">
-    
-    <header 
-      class="group-levels-banner" 
-      [style.--group-cover-image]="group.coverImage ? 'url(' + group.coverImage + ')' : 'none'"
-    >
-      <div class="group-levels-bg" aria-hidden="true"></div>
-      <div class="group-levels-vignette" aria-hidden="true"></div>
+    @if (group(); as currentGroup) {
+      <header 
+        class="group-levels-banner" 
+        [style.--group-cover-image]="currentGroup.coverImage ? 'url(' + currentGroup.coverImage + ')' : 'none'"
+      >
+        <div class="group-levels-bg" aria-hidden="true"></div>
+        <div class="group-levels-vignette" aria-hidden="true"></div>
 
-      <div class="group-levels-topbar">
-        <div class="group-levels-back-slot">
-          <app-back-button (pressed)="goBack()" />
-        </div>
+        <div class="group-levels-topbar">
+          <div class="group-levels-back-slot">
+            <app-back-button (pressed)="goBack()" />
+          </div>
 
-        <div class="group-levels-logo-slot">
-          <img
-            src="assets/logo-bafott.png"
-            alt="BAFOTT"
-            class="group-levels-logo"
-          />
-        </div>
+          <div class="group-levels-logo-slot">
+            <img
+              src="assets/logo-bafott.png"
+              alt="BAFOTT"
+              class="group-levels-logo"
+            />
+          </div>
 
-        <div class="group-levels-actions-slot">
-          <div class="group-levels-pill">
-            <span class="group-levels-pill-label">Grupo</span>
-            <span class="group-levels-pill-name">{{ group.name }}</span>
+          <div class="group-levels-actions-slot">
+            <div class="group-levels-pill">
+              <span class="group-levels-pill-label">Grupo</span>
+              <span class="group-levels-pill-name">{{ currentGroup.name }}</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="group-levels-title-wrap">
-        <h1 class="group-levels-title">
-          Nuestros niveles disponibles
-          <span class="group-levels-title-accent">· {{ group.name }}</span>
-        </h1>
+        <div class="group-levels-title-wrap">
+          <h1 class="group-levels-title">
+            Nuestros niveles disponibles
+            <span class="group-levels-title-accent">· {{ currentGroup.name }}</span>
+          </h1>
 
-        @if (group.description) {
-          <p class="group-levels-subtitle">
-            {{ group.description }}
+          @if (currentGroup.description) {
+            <p class="group-levels-subtitle">
+              {{ currentGroup.description }}
+            </p>
+          }
+        </div>
+
+        <div class="group-levels-bottom-accent" aria-hidden="true">
+          <div class="group-levels-accent-red"></div>
+          <div class="group-levels-accent-yellow"></div>
+          <div class="group-levels-accent-green"></div>
+        </div>
+      </header>
+
+      <section class="group-levels-content">
+         <app-levels-slider
+          [levels]="currentGroup.levels"
+          (levelSelected)="openLevel($event)"
+        />
+      </section>
+    } @else {
+      <section class="group-levels-empty">
+        <app-back-button (pressed)="goBack()" />
+        <div class="group-levels-empty-copy">
+          <p class="group-levels-empty-eyebrow">No disponible en esta sucursal</p>
+          <h1 class="group-levels-empty-title">Este grupo no está activo en la sede seleccionada</h1>
+          <p class="group-levels-empty-text">
+            Cambia de sucursal o vuelve al menú para explorar los grupos disponibles.
           </p>
-        }
-      </div>
-
-      <div class="group-levels-bottom-accent" aria-hidden="true">
-        <div class="group-levels-accent-red"></div>
-        <div class="group-levels-accent-yellow"></div>
-        <div class="group-levels-accent-green"></div>
-      </div>
-    </header>
-
-    <section class="group-levels-content">
-       <app-levels-slider
-        [levels]="group.levels"
-        (levelSelected)="openLevel($event)"
-      />
-    </section>
-
+        </div>
+      </section>
+    }
   </section>
 </app-screen-container>

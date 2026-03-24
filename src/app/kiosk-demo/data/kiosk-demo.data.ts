@@ -111,7 +111,7 @@ export const kioskBranches: Branch[] = [
         badge: 'Institucional',
       },
     ],
-
+    availableGroupIds: ['ninos', 'jovenes', 'adultos', 'talleres'],
   },
   {
     id: 'bafott-centro',
@@ -137,7 +137,7 @@ export const kioskBranches: Branch[] = [
         badge: 'Comunidad',
       },
     ],
-
+    availableGroupIds: ['ninos', 'jovenes', 'adultos', 'talleres'],
   },
   {
     id: 'bafott-sacaba',
@@ -163,6 +163,7 @@ export const kioskBranches: Branch[] = [
         badge: 'Institucional',
       },
     ],
+    availableGroupIds: ['ninos', 'jovenes', 'adultos'],
   },
 ];
 

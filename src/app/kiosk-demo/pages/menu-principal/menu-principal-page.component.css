@@ -170,6 +170,41 @@
   padding-inline: 0.25rem;
 }
 
+.menu-empty-state {
+  width: min(100%, 34rem);
+  padding: 1.5rem 1.4rem;
+  border: 1.5px solid #dcecf1;
+  border-radius: 1.5rem;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fcfd 100%);
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
+  text-align: center;
+}
+
+.menu-empty-eyebrow {
+  margin: 0;
+  color: #78909c;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.menu-empty-title {
+  margin: 0.65rem 0 0;
+  color: #1f2937;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2vw, 1.9rem);
+  font-weight: 900;
+  line-height: 1.08;
+}
+
+.menu-empty-copy {
+  margin: 0.7rem 0 0;
+  color: rgba(31, 41, 55, 0.72);
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
 .menu-card {
   --stagger-x: 0rem;
   position: relative;

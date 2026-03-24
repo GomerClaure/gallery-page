@@ -27,6 +27,7 @@
 
     <button
       type="button"
+      (click)="openContactModal()"
       aria-label="Ayuda"
       title="Ayuda"
       class="group-selection-action-btn group-selection-action-btn--help"
@@ -37,15 +38,25 @@
 
   <section class="group-selection-content">
     <div class="group-selection-list">
-      @for (group of content.groups(); track group.id; let i = $index) {
-        <div
-          class="group-selection-row"
-          [class.group-selection-row--step-2]="i === 1"
-          [class.group-selection-row--step-3]="i === 2"
-          [class.group-selection-row--step-4]="i === 3"
-        >
-          <app-group-card [group]="group" (selected)="openLevels($event)" />
-        </div>
+      @if (content.groups().length) {
+        @for (group of content.groups(); track group.id; let i = $index) {
+          <div
+            class="group-selection-row"
+            [class.group-selection-row--step-2]="i === 1"
+            [class.group-selection-row--step-3]="i === 2"
+            [class.group-selection-row--step-4]="i === 3"
+          >
+            <app-group-card [group]="group" (selected)="openLevels($event)" />
+          </div>
+        }
+      } @else {
+        <article class="group-selection-empty">
+          <p class="group-selection-empty-eyebrow">Sucursal sin grupos activos</p>
+          <h2 class="group-selection-empty-title">No hay grupos disponibles en esta sede</h2>
+          <p class="group-selection-empty-copy">
+            Puedes cambiar de sucursal o escribirnos por WhatsApp para confirmar próximos talleres.
+          </p>
+        </article>
       }
     </div>
   </section>
@@ -56,4 +67,8 @@
     (onClose)="closeBranchSelector()"
     (onBranchSelected)="onBranchSelected()"
   />
+}
+
+@if (showContactModal()) {
+  <app-contact-modal (onClose)="closeContactModal()" />
 }

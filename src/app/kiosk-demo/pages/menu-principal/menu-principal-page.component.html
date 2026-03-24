@@ -39,6 +39,7 @@
 
         <button
           type="button"
+          (click)="openContactModal()"
           class="menu-help-btn"
           aria-label="Información"
           title="Información"
@@ -57,46 +58,56 @@
 
     <div class="menu-cards-wrap">
       <div class="menu-staggered-container">
-        @for (group of content.groups(); track group.id; let index = $index) {
-          <button
-            type="button"
-            (click)="openLevels(group.id)"
-            class="menu-card"
-            aria-label="Seleccionar grupo {{ group.name }}"
-            [ngClass]="getStaggerClass(index)"
-          >
-            <div class="menu-card-media">
-              @if (group.coverImage) {
-                <img
-                  [src]="group.coverImage"
-                  [alt]="group.name"
-                  class="menu-card-image"
-                />
-              } @else {
-                <svg
-                  class="menu-card-icon"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5Zm0 2c-3.33 0-10 1.67-10 5v1h20v-1c0-3.33-6.67-5-10-5Z"
+        @if (content.groups().length) {
+          @for (group of content.groups(); track group.id; let index = $index) {
+            <button
+              type="button"
+              (click)="openLevels(group.id)"
+              class="menu-card"
+              aria-label="Seleccionar grupo {{ group.name }}"
+              [ngClass]="getStaggerClass(index)"
+            >
+              <div class="menu-card-media">
+                @if (group.coverImage) {
+                  <img
+                    [src]="group.coverImage"
+                    [alt]="group.name"
+                    class="menu-card-image"
                   />
-                </svg>
-              }
-            </div>
-
-            <div class="menu-card-content">
-              <h2 class="menu-card-title">{{ group.name }}</h2>
-
-              <div class="menu-card-action-wrap">
-                <span class="menu-card-action">Seleccionar</span>
-                <span class="menu-card-arrow" aria-hidden="true">→</span>
+                } @else {
+                  <svg
+                    class="menu-card-icon"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5Zm0 2c-3.33 0-10 1.67-10 5v1h20v-1c0-3.33-6.67-5-10-5Z"
+                    />
+                  </svg>
+                }
               </div>
-            </div>
 
-            <div class="menu-card-accent" aria-hidden="true"></div>
-          </button>
+              <div class="menu-card-content">
+                <h2 class="menu-card-title">{{ group.name }}</h2>
+
+                <div class="menu-card-action-wrap">
+                  <span class="menu-card-action">Seleccionar</span>
+                  <span class="menu-card-arrow" aria-hidden="true">→</span>
+                </div>
+              </div>
+
+              <div class="menu-card-accent" aria-hidden="true"></div>
+            </button>
+          }
+        } @else {
+          <article class="menu-empty-state">
+            <p class="menu-empty-eyebrow">Sucursal sin grupos activos</p>
+            <h2 class="menu-empty-title">No hay talleres ni grupos disponibles por ahora</h2>
+            <p class="menu-empty-copy">
+              Cambia de sucursal o consulta por WhatsApp para conocer la programación vigente.
+            </p>
+          </article>
         }
       </div>
     </div>
@@ -114,4 +125,8 @@
     (onClose)="closeBranchSelector()"
     (onBranchSelected)="onBranchSelected()"
   />
+}
+
+@if (showContactModal()) {
+  <app-contact-modal (onClose)="closeContactModal()" />
 }

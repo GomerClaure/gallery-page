@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { LevelsSlicer } from '../../components/levels-slider/levels-slider.component';
@@ -17,12 +17,10 @@ import { BackButtonComponent } from '../../components/back-button/back-button.co
 export class GroupLevelsPageComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly groupId = this.route.snapshot.paramMap.get('groupId') ?? '';
 
   protected readonly content = inject(AcademyContentService);
-
-  protected readonly group =
-    this.content.getGroup(this.route.snapshot.paramMap.get('groupId') ?? '') ??
-    this.content.groups()[0];
+  protected readonly group = computed(() => this.content.getGroup(this.groupId) ?? null);
 
   constructor() {
     this.content.ensureBranchSelected();
@@ -33,6 +31,11 @@ export class GroupLevelsPageComponent {
   }
 
   protected openLevel(levelId: string): void {
-    void this.router.navigate(['/grupos', this.group.id, 'niveles', levelId]);
+    const group = this.group();
+    if (!group) {
+      return;
+    }
+
+    void this.router.navigate(['/grupos', group.id, 'niveles', levelId]);
   }
 }

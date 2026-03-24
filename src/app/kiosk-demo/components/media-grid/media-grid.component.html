@@ -11,11 +11,15 @@
     <p class="text-sm text-stone-500">{{ events().length }} eventos disponibles</p>
   </div>
 
-  <div class="flex gap-6 overflow-x-auto pb-8 pt-2 px-2 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+  <div
+    class="flex gap-6 pb-8 pt-2 px-2 snap-x snap-mandatory scroll-px-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+    [class.overflow-x-auto]="hasHorizontalScroll()"
+    [class.justify-center]="!hasHorizontalScroll()"
+  >
     @for (event of events(); track event.id) {
       <button
         type="button"
-        class="group shrink-0 w-[380px] snap-center overflow-hidden rounded-[2.25rem] border-0 bg-white text-left shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] focus-visible:outline-none"
+        class="group shrink-0 w-full max-w-95 snap-start overflow-hidden rounded-[2.25rem] border-0 bg-white text-left shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] focus-visible:outline-none"
         (click)="eventSelected.emit(event.id)"
       >
         <div class="relative overflow-hidden">
