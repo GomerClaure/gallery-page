@@ -17,6 +17,7 @@ type SwiperContainerElement = HTMLElement & {
   initialize: () => void;
   swiper?: {
     update: () => void;
+    destroy?: (deleteInstance?: boolean, cleanStyles?: boolean) => void;
   };
 };
 
@@ -42,27 +43,62 @@ export class LevelsSlicer implements AfterViewInit {
     const hasManyLevels = totalLevels > 1;
 
     const config: SwiperOptions = {
-      effect: 'coverflow',
-      coverflowEffect: {
-        rotate: 0,
-        stretch: -30,
-        depth: 180,
-        modifier: 2,
-        slideShadows: false,
-      },
       allowTouchMove: hasManyLevels,
-      centeredSlides: true,
       grabCursor: hasManyLevels,
-      loop: totalLevels >= 4,
       shortSwipes: true,
       slideToClickedSlide: true,
-      slidesPerView: 'auto',
-      speed: 520,
+      speed: 420,
       watchSlidesProgress: true,
+      observer: true,
+      observeParents: true,
       keyboard: {
         enabled: true,
         onlyInViewport: true,
       },
+
+      slidesPerView: 1.15,
+      spaceBetween: 14,
+      centeredSlides: true,
+      loop: false,
+
+      breakpoints: {
+        0: {
+          slidesPerView: 1.15,
+          spaceBetween: 14,
+          centeredSlides: true,
+          loop: false,
+          effect: 'slide',
+        },
+        480: {
+          slidesPerView: 1.35,
+          spaceBetween: 16,
+          centeredSlides: true,
+          loop: false,
+          effect: 'slide',
+        },
+        700: {
+          slidesPerView: 2.1,
+          spaceBetween: 20,
+          centeredSlides: totalLevels <= 2,
+          loop: false,
+          effect: 'slide',
+        },
+        960: {
+          slidesPerView: Math.min(totalLevels, 3),
+          spaceBetween: 24,
+          centeredSlides: totalLevels < 3,
+          loop: false,
+          effect: 'slide',
+        },
+        1280: {
+          slidesPerView: Math.min(totalLevels, 4),
+          spaceBetween: 28,
+          centeredSlides: totalLevels < 4,
+          loop: false,
+          effect: 'slide',
+        },
+      },
+
       pagination: hasManyLevels
         ? {
             clickable: true,
@@ -73,11 +109,14 @@ export class LevelsSlicer implements AfterViewInit {
 
     this.zone.runOutsideAngular(() => {
       if (typeof swiperElement.initialize !== 'function') return;
+
       Object.assign(swiperElement, config);
+
       if (swiperElement.swiper) {
         swiperElement.swiper.update();
         return;
       }
+
       swiperElement.initialize();
     });
   }
