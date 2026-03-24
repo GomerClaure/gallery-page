@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import {
-  ImageSlide,
   ImageSwiperComponent,
 } from '../../shared/components/image-swiper/image-swiper.component';
 import { BranchSelectorModalComponent } from '../../kiosk-demo/components/branch-selector-modal/branch-selector-modal.component';

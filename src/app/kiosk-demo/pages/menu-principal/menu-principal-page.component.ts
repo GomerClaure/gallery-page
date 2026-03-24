@@ -46,13 +46,6 @@ export class MenuPrincipalPage {
   }
 
   protected getStaggerClass(index: number): string {
-    const pattern = index % 6;
-
-    if (pattern === 0) return 'stagger-step-1';
-    if (pattern === 1) return 'stagger-step-2';
-    if (pattern === 2) return 'stagger-step-3';
-    if (pattern === 3) return 'stagger-step-4';
-    if (pattern === 4) return 'stagger-step-5';
-    return 'stagger-step-6';
+    return `stagger-step-${(index % 6) + 1}`;
   }
 }

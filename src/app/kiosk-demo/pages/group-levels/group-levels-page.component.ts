@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { KioskHeaderComponent } from '../../../shared/components/kiosk-header/kiosk-header.component';
 import { LevelsSlicer } from '../../components/levels-slider/levels-slider.component';
 import { ScreenContainerComponent } from '../../components/screen-container/screen-container.component';
 import { AcademyContentService } from '../../services/academy-content.service';
