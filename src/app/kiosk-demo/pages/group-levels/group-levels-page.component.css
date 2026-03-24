@@ -1,0 +1,197 @@
+:host {
+  display: block;
+  min-height: 100%;
+}
+
+.group-levels-shell {
+  --shell-x-padding: clamp(0.9rem, 1.8vw, 1.45rem);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  border-radius: 2rem;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.group-levels-banner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(200px, 30vh, 320px);
+  border-radius: 2rem 2rem 1.5rem 1.5rem;
+  overflow: hidden;
+  background: #111827;
+  padding: clamp(0.8rem, 1.4vw, 1.25rem) var(--shell-x-padding) 0;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+}
+
+.group-levels-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: clamp(0.75rem, 2vw, 1.5rem) var(--shell-x-padding) 0;
+  background: #ffffff;
+  align-items: center;
+
+}
+
+.group-levels-bg,
+.group-levels-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.group-levels-bg {
+  background-image: var(--group-cover-image);
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.045);
+  filter: saturate(1.02) brightness(0.66) blur(4px);
+}
+
+.group-levels-vignette {
+  background:
+    linear-gradient(180deg, rgba(11, 22, 34, 0.6) 0%, rgba(11, 22, 34, 0.3) 50%, rgba(11, 22, 34, 0.8) 100%),
+    radial-gradient(circle at 50% 50%, rgba(12, 20, 30, 0.1), rgba(12, 20, 30, 0.45));
+}
+
+.group-levels-topbar,
+.group-levels-title-wrap,
+.group-levels-bottom-accent {
+  position: relative;
+  z-index: 1;
+}
+
+.group-levels-topbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 1rem;
+  padding: 0.1rem;
+}
+
+.group-levels-logo-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.group-levels-logo {
+  width: clamp(4rem, 5.5vw, 5rem);
+  height: clamp(4rem, 5.5vw, 5rem);
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
+}
+
+.group-levels-actions-slot {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.group-levels-pill {
+  display: inline-grid;
+  row-gap: 0.05rem;
+  min-height: 2.8rem;
+  max-width: min(15rem, 42vw);
+  padding: 0.45rem 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.group-levels-pill-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.group-levels-pill-name {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.group-levels-title-wrap {
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+.group-levels-title {
+  margin: 0;
+  max-width: 68rem;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.8vw, 3.4rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-wrap: balance;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
+}
+
+.group-levels-title-accent {
+  color: #85ebff; /* accent primary */
+}
+
+.group-levels-subtitle {
+  margin: 0;
+  max-width: 52rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: clamp(0.92rem, 1.2vw, 1.05rem);
+  line-height: 1.45;
+  text-wrap: balance;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.group-levels-bottom-accent {
+  display: flex;
+  height: 0.35rem;
+  width: calc(100% + (var(--shell-x-padding) * 2));
+  margin-bottom: -0.05rem;
+  margin-left: calc(var(--shell-x-padding) * -1);
+  margin-right: calc(var(--shell-x-padding) * -1);
+  overflow: hidden;
+}
+
+.group-levels-accent-red,
+.group-levels-accent-yellow,
+.group-levels-accent-green {
+  flex: 1;
+}
+
+.group-levels-accent-red { background: #e53935; }
+.group-levels-accent-yellow { background: #fdd835; }
+.group-levels-accent-green { background: #43a047; }
+
+@media (max-width: 700px) {
+  .group-levels-topbar {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .group-levels-back-slot,
+  .group-levels-logo-slot,
+  .group-levels-actions-slot {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}

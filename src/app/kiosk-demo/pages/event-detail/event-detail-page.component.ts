@@ -38,7 +38,7 @@ export class EventDetailPageComponent {
   protected readonly event =
     this.content.getEvent(this.groupId, this.levelId, this.eventId) ??
     this.level.events[0];
-  protected readonly activeVideo = signal<EventMediaAsset | null>(null);
+  protected readonly activeMedia = signal<EventMediaAsset | null>(null);
   protected readonly heroSlides = computed<ImageSlide[]>(() =>
     this.event.media
       .filter((item) => item.type === 'image')
@@ -61,16 +61,16 @@ export class EventDetailPageComponent {
   }
 
   protected goBack(): void {
-    void this.router.navigate(['/kiosk/grupos', this.group.id, 'niveles', this.level.id], {
+    void this.router.navigate(['/grupos', this.group.id, 'niveles', this.level.id], {
       queryParams: { tab: 'gallery' },
     });
   }
 
-  protected openVideo(item: EventMediaAsset): void {
-    this.activeVideo.set(item);
+  protected openMedia(item: EventMediaAsset): void {
+    this.activeMedia.set(item);
   }
 
-  protected closeVideo(): void {
-    this.activeVideo.set(null);
+  protected closeMedia(): void {
+    this.activeMedia.set(null);
   }
 }

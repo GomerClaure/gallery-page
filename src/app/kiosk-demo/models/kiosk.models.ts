@@ -4,6 +4,7 @@ export interface Branch {
   city: string;
   address: string;
   note: string;
+  slides: { src: string; alt: string; badge: string }[];
 }
 
 export interface ScheduleSlot {
@@ -13,10 +14,12 @@ export interface ScheduleSlot {
 }
 
 export interface Teacher {
+  id?: string;
   name: string;
   role: string;
   bio: string;
   portrait: string;
+  isMain?: boolean;
 }
 
 export interface EventMediaAsset {
@@ -46,8 +49,9 @@ export interface GroupLevel {
   description: string;
   schedules: ScheduleSlot[];
   dances: string[];
-  teacher: Teacher;
+  teachers: Teacher[];
   events: LevelEvent[];
+  coverImage: string;
 }
 
 export interface InterestGroup {
@@ -61,4 +65,4 @@ export interface InterestGroup {
   levels: GroupLevel[];
 }
 
-export type DetailTab = 'info' | 'gallery';
+export type DetailTab = 'info' | 'teachers' | 'schedule' | 'gallery';

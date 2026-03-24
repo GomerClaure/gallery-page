@@ -1,15 +1,59 @@
-<app-screen-container
-  eyebrow="Exploración"
-  title="¿En qué grupo estás interesado?"
-  subtitle="Selecciona el segmento que mejor se ajusta a tu edad o al tipo de experiencia que deseas explorar."
->
-  <div class="mb-6">
-    <app-back-button (pressed)="goBack()" />
+<app-screen-container [compact]="false" [idleMs]="30000" variant="kiosk-clean">
+  <div menu-header-slot class="group-selection-header">
+    <div class="group-selection-brand-row">
+      <app-back-button (pressed)="goBack()" />
+
+      <img src="assets/logo-bafott.png" alt="BAFOTT" class="group-selection-logo" />
+    </div>
+
+    <h1 class="group-selection-title">¿En qué grupo estás interesado?</h1>
   </div>
 
-  <div class="grid flex-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
-    @for (group of content.groups(); track group.id) {
-      <app-group-card [group]="group" (selected)="openLevels($event)" />
+  <div menu-action-slot class="group-selection-actions">
+    @if (content.selectedBranch(); as branch) {
+      <div class="group-selection-branch-pill">
+        <span class="group-selection-branch-label">Sucursal</span>
+        <span class="group-selection-branch-name">{{ branch.name }}</span>
+      </div>
     }
+
+    <button
+      type="button"
+      (click)="openBranchSelector()"
+      class="group-selection-action-btn group-selection-action-btn--branch"
+    >
+      Cambiar sucursal
+    </button>
+
+    <button
+      type="button"
+      aria-label="Ayuda"
+      title="Ayuda"
+      class="group-selection-action-btn group-selection-action-btn--help"
+    >
+      ?
+    </button>
   </div>
+
+  <section class="group-selection-content">
+    <div class="group-selection-list">
+      @for (group of content.groups(); track group.id; let i = $index) {
+        <div
+          class="group-selection-row"
+          [class.group-selection-row--step-2]="i === 1"
+          [class.group-selection-row--step-3]="i === 2"
+          [class.group-selection-row--step-4]="i === 3"
+        >
+          <app-group-card [group]="group" (selected)="openLevels($event)" />
+        </div>
+      }
+    </div>
+  </section>
 </app-screen-container>
+
+@if (showBranchSelector()) {
+  <app-branch-selector-modal
+    (onClose)="closeBranchSelector()"
+    (onBranchSelected)="onBranchSelected()"
+  />
+}

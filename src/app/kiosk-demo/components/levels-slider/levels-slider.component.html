@@ -1,0 +1,34 @@
+<div class="levels-slider-zone" aria-label="Niveles del grupo">
+  <swiper-container
+    #levelsSwiper
+    init="false"
+    class="levels-swiper"
+    aria-label="Carrusel de niveles"
+  >
+    @for (level of levels(); track level.id; let index = $index) {
+      <swiper-slide class="levels-slide">
+        <button
+          type="button"
+          class="levels-level-card"
+          [attr.aria-label]="'Ver detalles de ' + level.name"
+          (click)="selectLevel(level.id)"
+        >
+          <span class="levels-level-accent" aria-hidden="true"></span>
+
+          <span class="levels-level-order" aria-hidden="true">
+            {{ levelOrder(index) }}
+          </span>
+
+          <div class="levels-level-main">
+            <h2 class="levels-level-name">{{ level.name }}</h2>
+            <p class="levels-level-description">
+              {{ level.shortDescription || level.description || '' }}
+            </p>
+          </div>
+
+          <span class="levels-level-cta">Explorar</span>
+        </button>
+      </swiper-slide>
+    }
+  </swiper-container>
+</div>

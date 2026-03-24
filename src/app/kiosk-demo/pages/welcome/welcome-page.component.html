@@ -7,10 +7,8 @@
 
     @if (shouldShowModal()) {
       <app-branch-selector-modal
-        [branches]="content.branches()"
-        [selectedBranchId]="content.selectedBranch()?.id ?? null"
-        (selected)="selectBranch($event)"
-        (confirmed)="openGroups()"
+        (onClose)="closeBranchSelector()"
+        (onBranchSelected)="onBranchSelected()"
       />
     }
   </div>

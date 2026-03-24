@@ -11,6 +11,7 @@ interface TabItem {
   selector: 'app-tab-navigation',
   standalone: true,
   templateUrl: './tab-navigation.component.html',
+  styleUrl: './tab-navigation.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabNavigationComponent {

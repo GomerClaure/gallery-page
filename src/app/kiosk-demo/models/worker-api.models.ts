@@ -6,6 +6,7 @@ export interface WorkerBranchDto {
   description: string | null;
   qrImageUrl: string | null;
   contacts?: WorkerBranchContactDto[];
+  slides?: { src: string; alt: string; badge: string }[];
 }
 
 export interface WorkerBranchContactDto {

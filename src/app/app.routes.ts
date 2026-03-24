@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { branchSelectedGuard } from './guards/branch-selected.guard';
 
 export const routes: Routes = [
   {
@@ -9,35 +10,32 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'kiosk',
+    path: 'menu',
+    canActivate: [branchSelectedGuard],
     loadComponent: () =>
-      import('./kiosk-demo/pages/welcome/welcome-page.component').then(
-        (module) => module.WelcomePageComponent,
+      import('./kiosk-demo/pages/menu-principal/menu-principal-page.component').then(
+        (module) => module.MenuPrincipalPage,
       ),
   },
   {
-    path: 'kiosk/grupos',
-    loadComponent: () =>
-      import('./kiosk-demo/pages/group-selection/group-selection-page.component').then(
-        (module) => module.GroupSelectionPageComponent,
-      ),
-  },
-  {
-    path: 'kiosk/grupos/:groupId/niveles',
+    path: 'grupos/:groupId/niveles',
+    canActivate: [branchSelectedGuard],
     loadComponent: () =>
       import('./kiosk-demo/pages/group-levels/group-levels-page.component').then(
         (module) => module.GroupLevelsPageComponent,
       ),
   },
   {
-    path: 'kiosk/grupos/:groupId/niveles/:levelId',
+    path: 'grupos/:groupId/niveles/:levelId',
+    canActivate: [branchSelectedGuard],
     loadComponent: () =>
       import('./kiosk-demo/pages/group-detail/group-detail-page.component').then(
         (module) => module.GroupDetailPageComponent,
       ),
   },
   {
-    path: 'kiosk/grupos/:groupId/niveles/:levelId/eventos/:eventId',
+    path: 'grupos/:groupId/niveles/:levelId/eventos/:eventId',
+    canActivate: [branchSelectedGuard],
     loadComponent: () =>
       import('./kiosk-demo/pages/event-detail/event-detail-page.component').then(
         (module) => module.EventDetailPageComponent,
@@ -48,3 +46,4 @@ export const routes: Routes = [
     redirectTo: '',
   },
 ];
+

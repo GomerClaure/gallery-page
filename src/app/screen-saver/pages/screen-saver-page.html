@@ -21,10 +21,10 @@
   <div class="relative z-10 grid min-h-dvh content-end px-5 py-8 sm:px-8 lg:content-center lg:px-16">
     <div class="max-w-3xl">
       <p class="mb-4 inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.24em] text-amber-200 backdrop-blur">
-        Ballet folklorico tradiciones de mi tierra
+        {{ contentService.selectedBranch()?.name || 'Ballet folklorico tradiciones de mi tierra' }}
       </p>
       <h1 class="font-['Sora'] text-4xl font-semibold leading-none text-white sm:text-6xl lg:text-8xl">
-        BAFOTT 2026
+        {{ contentService.selectedBranch() ? ('Sucursal ' + contentService.selectedBranch()?.city) : 'BAFOTT 2026' }}
       </h1>
       <p class="mt-5 max-w-2xl text-base leading-7 text-stone-200 sm:text-lg">
         Descubre la magia del ballet folclorico con Tradiciones de mi Tierra.
@@ -44,4 +44,13 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal de selección de rama -->
+  @if (showBranchSelector()) {
+    <app-branch-selector-modal
+      (onClose)="closeBranchSelector()"
+      (onBranchSelected)="onBranchSelected()"
+    />
+  }
 </section>
+

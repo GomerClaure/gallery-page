@@ -11,7 +11,7 @@ import { EventMediaAsset } from '../../models/kiosk.models';
 })
 export class EventMediaGalleryComponent {
   readonly media = input.required<EventMediaAsset[]>();
-  readonly videoSelected = output<EventMediaAsset>();
+  readonly mediaSelected = output<EventMediaAsset>();
 
   protected readonly orderedSizes = ['media-card--lg', 'media-card--md', 'media-card--sm'];
 }

@@ -1,0 +1,117 @@
+<app-screen-container
+  [compact]="false"
+  [idleMs]="30000"
+  variant="kiosk-clean"
+  appIdleReturnHome
+  appIdleReturnTarget="/"
+>
+  <section class="kiosk-menu-shell">
+    <header class="menu-topbar">
+      <div class="menu-back-slot">
+        <app-back-button (pressed)="goBack()" />
+      </div>
+
+      <div class="menu-logo-slot">
+        <img
+          src="assets/logo-bafott.png"
+          alt="BAFOTT"
+          class="menu-logo"
+        />
+      </div>
+
+      <div class="menu-actions-slot">
+        <button
+          type="button"
+          (click)="openBranchSelector()"
+          class="menu-branch-btn"
+          aria-label="Cambiar sucursal"
+        >
+          <span class="menu-branch-btn-label">Sucursal</span>
+
+          @if (content.selectedBranch(); as branch) {
+            <span class="menu-branch-btn-name">{{ branch.name }}</span>
+          } @else {
+            <span class="menu-branch-btn-name">Seleccionar</span>
+          }
+
+          <span class="menu-branch-btn-icon" aria-hidden="true">▾</span>
+        </button>
+
+        <button
+          type="button"
+          class="menu-help-btn"
+          aria-label="Información"
+          title="Información"
+        >
+          ?
+        </button>
+      </div>
+    </header>
+
+    <div class="menu-title-wrap">
+      <h1 class="menu-title">
+        ¿En qué grupo estás
+        <span class="menu-title-accent">interesado</span>?
+      </h1>
+    </div>
+
+    <div class="menu-cards-wrap">
+      <div class="menu-staggered-container">
+        @for (group of content.groups(); track group.id; let index = $index) {
+          <button
+            type="button"
+            (click)="openLevels(group.id)"
+            class="menu-card"
+            aria-label="Seleccionar grupo {{ group.name }}"
+            [ngClass]="getStaggerClass(index)"
+          >
+            <div class="menu-card-media">
+              @if (group.coverImage) {
+                <img
+                  [src]="group.coverImage"
+                  [alt]="group.name"
+                  class="menu-card-image"
+                />
+              } @else {
+                <svg
+                  class="menu-card-icon"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5Zm0 2c-3.33 0-10 1.67-10 5v1h20v-1c0-3.33-6.67-5-10-5Z"
+                  />
+                </svg>
+              }
+            </div>
+
+            <div class="menu-card-content">
+              <h2 class="menu-card-title">{{ group.name }}</h2>
+
+              <div class="menu-card-action-wrap">
+                <span class="menu-card-action">Seleccionar</span>
+                <span class="menu-card-arrow" aria-hidden="true">→</span>
+              </div>
+            </div>
+
+            <div class="menu-card-accent" aria-hidden="true"></div>
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="menu-bottom-accent" aria-hidden="true">
+      <div class="menu-accent-red"></div>
+      <div class="menu-accent-yellow"></div>
+      <div class="menu-accent-green"></div>
+    </div>
+  </section>
+</app-screen-container>
+
+@if (showBranchSelector()) {
+  <app-branch-selector-modal
+    (onClose)="closeBranchSelector()"
+    (onBranchSelected)="onBranchSelected()"
+  />
+}

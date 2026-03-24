@@ -6,6 +6,7 @@ import { InterestGroup } from '../../models/kiosk.models';
   selector: 'app-group-card',
   standalone: true,
   templateUrl: './group-card.component.html',
+  styleUrl: './group-card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GroupCardComponent {

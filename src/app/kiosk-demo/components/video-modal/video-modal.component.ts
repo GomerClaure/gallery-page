@@ -6,6 +6,7 @@ import { EventMediaAsset } from '../../models/kiosk.models';
   selector: 'app-video-modal',
   standalone: true,
   templateUrl: './video-modal.component.html',
+  styleUrl: './video-modal.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoModalComponent {

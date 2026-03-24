@@ -1,0 +1,70 @@
+// Utility class to keep a visually clean kiosk view without scrolling tracks
+// but still allow semantic scrolling behavior internally.
+
+:host {
+  display: block;
+}
+
+.hidden-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+}
+
+.detail-tab-host {
+  position: relative;
+  min-height: 100%;
+  isolation: isolate;
+  overflow: hidden;
+  contain: layout paint;
+}
+
+.detail-tab-panel {
+  min-height: 100%;
+  will-change: opacity, transform;
+}
+
+.detail-panel-enter {
+  animation: detailPanelEnter 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.detail-panel-leave {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  animation: detailPanelLeave 180ms ease-out both;
+}
+
+@keyframes detailPanelEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(20px, 0, 0) scale(0.985);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes detailPanelLeave {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(-14px, 0, 0) scale(0.992);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detail-panel-enter,
+  .detail-panel-leave {
+    animation-duration: 1ms;
+  }
+}
