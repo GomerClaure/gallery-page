@@ -11,47 +11,55 @@
     <p class="text-sm text-stone-500">{{ events().length }} eventos disponibles</p>
   </div>
 
-  <div class="grid gap-4 xl:grid-cols-2">
+  <div class="flex gap-6 overflow-x-auto pb-8 pt-2 px-2 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
     @for (event of events(); track event.id) {
       <button
         type="button"
-        class="group overflow-hidden rounded-[1.75rem] border border-stone-200 bg-white text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-400"
+        class="group shrink-0 w-[380px] snap-center overflow-hidden rounded-[2.25rem] border-0 bg-white text-left shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] focus-visible:outline-none"
         (click)="eventSelected.emit(event.id)"
       >
-        <div class="relative">
+        <div class="relative overflow-hidden">
           <img
             [src]="event.coverImage"
             [alt]="event.name"
-            class="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
+            class="h-64 w-full object-cover transition duration-700 group-hover:scale-110"
           />
-          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-stone-950/70 via-stone-950/20 to-transparent p-5">
-            <span class="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-stone-700">
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent p-6">
+            <span class="inline-flex rounded-full bg-white/20 backdrop-blur-md px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white ring-1 ring-white/30 transition-colors group-hover:bg-white/30 tracking-tight">
               Evento escénico
             </span>
           </div>
         </div>
 
-        <div class="space-y-4 p-5">
+        <div class="flex flex-col gap-4 p-6 bg-gradient-to-b from-white to-stone-50 h-[220px]">
           <div class="flex items-start justify-between gap-3">
             <div>
-              <h4 class="text-2xl font-semibold text-stone-900">{{ event.name }}</h4>
-              <p class="mt-1 text-sm font-medium text-stone-500">{{ event.year }}</p>
+              <h4 class="text-[22px] font-bold text-stone-900 leading-tight group-hover:text-amber-700 transition-colors duration-300">{{ event.name }}</h4>
+              <p class="mt-1.5 text-xs font-semibold uppercase tracking-wider text-stone-400">{{ event.year }}</p>
             </div>
 
-            <span class="rounded-full bg-stone-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
-              Ver detalle
-            </span>
+            <div class="shrink-0 flex h-8 w-8 items-center justify-center rounded-full bg-stone-100 text-stone-400 transition-all duration-300 group-hover:bg-amber-100 group-hover:text-amber-700">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform">
+                <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+              </svg>
+            </div>
           </div>
 
-          <p class="text-sm leading-6 text-stone-600">
+          <p class="text-[14px] leading-relaxed text-stone-500 line-clamp-3 flex-1 font-medium">
             {{ event.summary }}
           </p>
 
-          <div class="flex flex-wrap gap-3">
-            <span class="rounded-full bg-stone-100 px-4 py-2 text-sm font-medium text-stone-700">
+          <div class="flex flex-wrap gap-2 pt-2 border-t border-stone-100 mt-auto">
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-stone-100/80 px-3 py-1.5 text-xs font-bold text-stone-600 transition-colors group-hover:bg-amber-50 group-hover:text-amber-800">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5 opacity-70">
+                <path fill-rule="evenodd" d="M1 5.25A2.25 2.25 0 013.25 3h13.5A2.25 2.25 0 0119 5.25v9.5A2.25 2.25 0 0116.75 17H3.25A2.25 2.25 0 011 14.75v-9.5zm1.5 5.81v3.69c0 .414.336.75.75.75h13.5a.75.75 0 00.75-.75v-2.69l-2.22-2.219a2.25 2.25 0 00-3.182 0l-1.44 1.439a2.25 2.25 0 01-3.182 0L5.06 8.11a2.25 2.25 0 00-3.182 0l-2.378 2.378a.75.75 0 000 .572z" clip-rule="evenodd" />
+              </svg>
               {{ photoCount(event) }} fotos
             </span>
-            <span class="rounded-full bg-stone-100 px-4 py-2 text-sm font-medium text-stone-700">
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-stone-100/80 px-3 py-1.5 text-xs font-bold text-stone-600 transition-colors group-hover:bg-amber-50 group-hover:text-amber-800">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5 opacity-70">
+                <path d="M3.25 4A2.25 2.25 0 001 6.25v7.5A2.25 2.25 0 003.25 16h7.5A2.25 2.25 0 0013 13.75v-7.5A2.25 2.25 0 0010.75 4h-7.5zM19 4.75a.75.75 0 00-1.28-.53l-3 3a.75.75 0 00-.22.53v4.5c0 .199.079.39.22.53l3 3a.75.75 0 001.28-.53V4.75z" />
+              </svg>
               {{ videoCount(event) }} videos
             </span>
           </div>

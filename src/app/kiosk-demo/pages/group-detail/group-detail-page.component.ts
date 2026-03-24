@@ -44,8 +44,10 @@ export class GroupDetailPageComponent {
     (this.route.snapshot.queryParamMap.get('tab') as DetailTab | null) ?? 'info',
   );
   protected readonly tabs = [
-    { id: 'info' as const, label: 'Información' },
-    { id: 'gallery' as const, label: 'Galería multimedia' },
+    { id: 'info' as const, label: 'Resumen' },
+    { id: 'teachers' as const, label: 'Docencia' },
+    { id: 'schedule' as const, label: 'Horarios' },
+    { id: 'gallery' as const, label: 'Galería' },
   ];
 
   constructor() {

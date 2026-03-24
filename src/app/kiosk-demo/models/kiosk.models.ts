@@ -65,4 +65,4 @@ export interface InterestGroup {
   levels: GroupLevel[];
 }
 
-export type DetailTab = 'info' | 'gallery';
+export type DetailTab = 'info' | 'teachers' | 'schedule' | 'gallery';
