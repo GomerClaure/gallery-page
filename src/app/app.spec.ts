@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 
-import { App } from './app';
+import { App } from './app.component';
 import { routes } from './app.routes';
 
 describe('App', () => {
@@ -28,7 +28,7 @@ describe('App', () => {
 
     expect(router.url).toBe('/');
     expect(compiled.querySelector('.screen-saver')).toBeTruthy();
-    expect(compiled.querySelectorAll('swiper-slide').length).toBe(6);
+    expect(compiled.querySelectorAll('swiper-slide').length).toBe(3);
     expect(compiled.textContent).toContain('haz clic');
   });
 });

@@ -1,27 +1,27 @@
 import { Routes } from '@angular/router';
-import { branchSelectedGuard } from './guards/branch-selected.guard';
+import { branchSelectedGuard } from './core/guards/branch-selected.guard';
 
 export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./screen-saver/pages/screen-saver-page').then(
-        (module) => module.ScreenSaverPage,
+      import('./features/screen-saver/pages/screen-saver-page.component').then(
+        (module) => module.ScreenSaverPageComponent,
       ),
   },
   {
     path: 'menu',
     canActivate: [branchSelectedGuard],
     loadComponent: () =>
-      import('./kiosk-demo/pages/menu-principal/menu-principal-page.component').then(
-        (module) => module.MenuPrincipalPage,
+      import('./features/kiosk/menu/page/menu-page.component').then(
+        (module) => module.MenuPageComponent,
       ),
   },
   {
     path: 'grupos/:groupId/niveles',
     canActivate: [branchSelectedGuard],
     loadComponent: () =>
-      import('./kiosk-demo/pages/group-levels/group-levels-page.component').then(
+      import('./features/kiosk/group-levels/page/group-levels-page.component').then(
         (module) => module.GroupLevelsPageComponent,
       ),
   },
@@ -29,7 +29,7 @@ export const routes: Routes = [
     path: 'grupos/:groupId/niveles/:levelId',
     canActivate: [branchSelectedGuard],
     loadComponent: () =>
-      import('./kiosk-demo/pages/group-detail/group-detail-page.component').then(
+      import('./features/kiosk/group-detail/page/group-detail-page.component').then(
         (module) => module.GroupDetailPageComponent,
       ),
   },
@@ -37,7 +37,7 @@ export const routes: Routes = [
     path: 'grupos/:groupId/niveles/:levelId/eventos/:eventId',
     canActivate: [branchSelectedGuard],
     loadComponent: () =>
-      import('./kiosk-demo/pages/event-detail/event-detail-page.component').then(
+      import('./features/kiosk/event-detail/page/event-detail-page.component').then(
         (module) => module.EventDetailPageComponent,
       ),
   },
@@ -46,4 +46,3 @@ export const routes: Routes = [
     redirectTo: '',
   },
 ];
-
