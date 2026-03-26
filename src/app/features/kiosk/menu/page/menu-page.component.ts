@@ -7,6 +7,8 @@ import { ScreenContainerComponent } from '../../layout/screen-container/screen-c
 import { AcademyContentService } from '../../services/academy-content.service';
 import { BackButtonComponent } from '../components/back-button/back-button.component';
 import { ContactModalComponent } from '../components/contact-modal/contact-modal.component';
+import { SeoService } from '../../../../core/services/seo.service';
+import { ROUTE_SEO_CONFIG } from '../../../../core/config/route-seo.config';
 
 @Component({
   selector: 'app-menu-page',
@@ -24,9 +26,19 @@ import { ContactModalComponent } from '../components/contact-modal/contact-modal
 })
 export class MenuPageComponent {
   private readonly router = inject(Router);
+  private readonly seoService = inject(SeoService);
   protected readonly content = inject(AcademyContentService);
   protected readonly showBranchSelector = signal(false);
   protected readonly showContactModal = signal(false);
+
+  constructor() {
+    const seoConfig = ROUTE_SEO_CONFIG.menu;
+    this.seoService.updateSeo({
+      title: seoConfig.title,
+      description: seoConfig.description,
+      keywords: seoConfig.keywords,
+    });
+  }
 
   protected openLevels(groupId: string): void {
     void this.router.navigate(['/grupos', groupId, 'niveles']);

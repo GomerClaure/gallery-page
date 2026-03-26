@@ -5,6 +5,8 @@ import { ScreenContainerComponent } from '../../layout/screen-container/screen-c
 import { AcademyContentService } from '../../services/academy-content.service';
 import { BackButtonComponent } from '../../menu/components/back-button/back-button.component';
 import { LevelsSliderComponent } from '../components/levels-slider/levels-slider.component';
+import { SeoService } from '../../../../core/services/seo.service';
+import { ROUTE_SEO_CONFIG } from '../../../../core/config/route-seo.config';
 
 @Component({
   selector: 'app-group-levels-page',
@@ -17,6 +19,7 @@ import { LevelsSliderComponent } from '../components/levels-slider/levels-slider
 export class GroupLevelsPageComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly seoService = inject(SeoService);
   private readonly groupId = this.route.snapshot.paramMap.get('groupId') ?? '';
 
   protected readonly content = inject(AcademyContentService);
@@ -24,6 +27,13 @@ export class GroupLevelsPageComponent {
 
   constructor() {
     this.content.ensureBranchSelected();
+
+    const seoConfig = ROUTE_SEO_CONFIG.groupLevels;
+    this.seoService.updateSeo({
+      title: seoConfig.title,
+      description: seoConfig.description,
+      keywords: seoConfig.keywords,
+    });
   }
 
   protected goBack(): void {

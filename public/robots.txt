@@ -1,0 +1,12 @@
+# NOTA: Indexing comentado temporalmente
+# Descomentar cuando esté listo para ir a producción
+
+# Permite a todos los crawlers
+User-agent: *
+Disallow: /
+
+# Sitemap (comentado hasta que esté listo)
+# Sitemap: /sitemap.xml
+
+# Crawl-delay (comentado hasta indexing)
+# Crawl-delay: 1

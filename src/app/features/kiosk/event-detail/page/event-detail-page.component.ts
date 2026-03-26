@@ -8,6 +8,8 @@ import { BackButtonComponent } from '../../menu/components/back-button/back-butt
 import { ImageSwiperComponent, ImageSlide } from '../../../../shared/ui/image-swiper/image-swiper.component';
 import { EventMediaGalleryComponent } from '../components/event-media-gallery/event-media-gallery.component';
 import { VideoModalComponent } from '../components/video-modal/video-modal.component';
+import { SeoService } from '../../../../core/services/seo.service';
+import { ROUTE_SEO_CONFIG } from '../../../../core/config/route-seo.config';
 
 @Component({
   selector: 'app-event-detail-page',
@@ -25,6 +27,7 @@ import { VideoModalComponent } from '../components/video-modal/video-modal.compo
 export class EventDetailPageComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly seoService = inject(SeoService);
   protected readonly content = inject(AcademyContentService);
 
   private readonly groupId = this.route.snapshot.paramMap.get('groupId') ?? '';
@@ -58,6 +61,13 @@ export class EventDetailPageComponent {
 
   constructor() {
     this.content.ensureBranchSelected();
+
+    const seoConfig = ROUTE_SEO_CONFIG.eventDetail;
+    this.seoService.updateSeo({
+      title: seoConfig.title,
+      description: seoConfig.description,
+      keywords: seoConfig.keywords,
+    });
   }
 
   protected goBack(): void {

@@ -11,6 +11,8 @@ import { MediaGridComponent } from '../components/media-grid/media-grid.componen
 import { ScheduleCardComponent } from '../components/schedule-card/schedule-card.component';
 import { TabNavigationComponent } from '../components/tab-navigation/tab-navigation.component';
 import { TeacherCardComponent } from '../components/teacher-card/teacher-card.component';
+import { SeoService } from '../../../../core/services/seo.service';
+import { ROUTE_SEO_CONFIG } from '../../../../core/config/route-seo.config';
 
 @Component({
   selector: 'app-group-detail-page',
@@ -32,6 +34,7 @@ import { TeacherCardComponent } from '../components/teacher-card/teacher-card.co
 export class GroupDetailPageComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly seoService = inject(SeoService);
   protected readonly content = inject(AcademyContentService);
 
   private readonly groupId = this.route.snapshot.paramMap.get('groupId') ?? '';
@@ -54,6 +57,13 @@ export class GroupDetailPageComponent {
 
   constructor() {
     this.content.ensureBranchSelected();
+
+    const seoConfig = ROUTE_SEO_CONFIG.groupDetail;
+    this.seoService.updateSeo({
+      title: seoConfig.title,
+      description: seoConfig.description,
+      keywords: seoConfig.keywords,
+    });
   }
 
   protected goBack(): void {
