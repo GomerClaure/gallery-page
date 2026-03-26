@@ -1,0 +1,220 @@
+<!-- Mobile Overlay -->
+<div *ngIf="sidebarOpen()"
+     (click)="closeSidebar()"
+     class="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden">
+</div>
+
+<div class="flex h-dvh font-sans text-neutral-800 bg-[var(--color-background)]">
+
+  <!-- ─── Sidebar ─── -->
+  <aside [class.translate-x-0]="sidebarOpen()"
+         [class.-translate-x-full]="!sidebarOpen()"
+         class="fixed inset-y-0 left-0 z-50 flex w-64 flex-col
+                bg-gradient-to-b from-[#0b1e2e] via-[#122c40] to-[#0d2233] text-white
+                transition-transform duration-200 ease-in-out
+                lg:static lg:translate-x-0 lg:z-auto">
+    
+    <!-- Logo -->
+    <div class="flex items-center gap-3 px-5 pt-5 pb-4">
+      <img src="assets/logo-bafott.png" alt="BAFOTT" class="w-10 h-10 object-contain drop-shadow-lg">
+      <span class="font-[var(--font-display)] text-xl font-extrabold tracking-tight">
+        BAFOTT <span class="text-sm font-medium text-[var(--color-primary-light)] ml-0.5">Admin</span>
+      </span>
+    </div>
+
+    <!-- Accent bar -->
+    <div class="flex h-[3px] shrink-0">
+      <span class="flex-1 bg-[var(--color-accent-red)]"></span>
+      <span class="flex-1 bg-[var(--color-accent-yellow)]"></span>
+      <span class="flex-1 bg-[var(--color-accent-green)]"></span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 overflow-y-auto py-3">
+      <ul class="space-y-0.5 px-2.5">
+
+        <li class="px-3 pt-4 pb-1.5 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-white/35">
+          Principal
+        </li>
+        <li>
+          <a routerLink="/admin/dashboard" routerLinkActive="!bg-[var(--color-primary)]/18 !text-white !font-bold !border-l-[var(--color-primary)]"
+             (click)="closeSidebar()"
+             class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/70 border-l-[3px] border-transparent
+                    text-[0.88rem] font-medium transition-colors hover:bg-white/8 hover:text-white">
+            <span class="material-symbols-outlined text-lg leading-none">dashboard</span>
+            Dashboard
+          </a>
+        </li>
+
+        <li class="px-3 pt-5 pb-1.5 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-white/35">
+          Contenido
+        </li>
+        <li>
+          <a routerLink="/admin/branches" routerLinkActive="!bg-[var(--color-primary)]/18 !text-white !font-bold !border-l-[var(--color-primary)]"
+             (click)="closeSidebar()"
+             class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/70 border-l-[3px] border-transparent
+                    text-[0.88rem] font-medium transition-colors hover:bg-white/8 hover:text-white">
+            <span class="material-symbols-outlined text-lg leading-none">storefront</span>
+            Sucursales
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/group-types" routerLinkActive="!bg-[var(--color-primary)]/18 !text-white !font-bold !border-l-[var(--color-primary)]"
+             (click)="closeSidebar()"
+             class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/70 border-l-[3px] border-transparent
+                    text-[0.88rem] font-medium transition-colors hover:bg-white/8 hover:text-white">
+            <span class="material-symbols-outlined text-lg leading-none">category</span>
+            Tipos de grupo
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/groups" routerLinkActive="!bg-[var(--color-primary)]/18 !text-white !font-bold !border-l-[var(--color-primary)]"
+             (click)="closeSidebar()"
+             class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/70 border-l-[3px] border-transparent
+                    text-[0.88rem] font-medium transition-colors hover:bg-white/8 hover:text-white">
+            <span class="material-symbols-outlined text-lg leading-none">groups</span>
+            Grupos
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/levels" routerLinkActive="!bg-[var(--color-primary)]/18 !text-white !font-bold !border-l-[var(--color-primary)]"
+             (click)="closeSidebar()"
+             class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/70 border-l-[3px] border-transparent
+                    text-[0.88rem] font-medium transition-colors hover:bg-white/8 hover:text-white">
+            <span class="material-symbols-outlined text-lg leading-none">stairs</span>
+            Niveles
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/teachers" routerLinkActive="!bg-[var(--color-primary)]/18 !text-white !font-bold !border-l-[var(--color-primary)]"
+             (click)="closeSidebar()"
+             class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/70 border-l-[3px] border-transparent
+                    text-[0.88rem] font-medium transition-colors hover:bg-white/8 hover:text-white">
+            <span class="material-symbols-outlined text-lg leading-none">school</span>
+            Profesores
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/dances" routerLinkActive="!bg-[var(--color-primary)]/18 !text-white !font-bold !border-l-[var(--color-primary)]"
+             (click)="closeSidebar()"
+             class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/70 border-l-[3px] border-transparent
+                    text-[0.88rem] font-medium transition-colors hover:bg-white/8 hover:text-white">
+            <span class="material-symbols-outlined text-lg leading-none">music_note</span>
+            Danzas
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/events" routerLinkActive="!bg-[var(--color-primary)]/18 !text-white !font-bold !border-l-[var(--color-primary)]"
+             (click)="closeSidebar()"
+             class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/70 border-l-[3px] border-transparent
+                    text-[0.88rem] font-medium transition-colors hover:bg-white/8 hover:text-white">
+            <span class="material-symbols-outlined text-lg leading-none">event</span>
+            Eventos
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/media" routerLinkActive="!bg-[var(--color-primary)]/18 !text-white !font-bold !border-l-[var(--color-primary)]"
+             (click)="closeSidebar()"
+             class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/70 border-l-[3px] border-transparent
+                    text-[0.88rem] font-medium transition-colors hover:bg-white/8 hover:text-white">
+            <span class="material-symbols-outlined text-lg leading-none">perm_media</span>
+            Multimedia
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/kiosk-home" routerLinkActive="!bg-[var(--color-primary)]/18 !text-white !font-bold !border-l-[var(--color-primary)]"
+             (click)="closeSidebar()"
+             class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/70 border-l-[3px] border-transparent
+                    text-[0.88rem] font-medium transition-colors hover:bg-white/8 hover:text-white">
+            <span class="material-symbols-outlined text-lg leading-none">devices</span>
+            Pantalla principal
+          </a>
+        </li>
+
+        <!-- DIRECTOR only -->
+        <ng-container *ngIf="isDirector">
+          <li class="px-3 pt-5 pb-1.5 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-white/35">
+            Administración
+          </li>
+          <li>
+            <a routerLink="/admin/users" routerLinkActive="!bg-[var(--color-primary)]/18 !text-white !font-bold !border-l-[var(--color-primary)]"
+               (click)="closeSidebar()"
+               class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/70 border-l-[3px] border-transparent
+                      text-[0.88rem] font-medium transition-colors hover:bg-white/8 hover:text-white">
+              <span class="material-symbols-outlined text-lg leading-none">manage_accounts</span>
+              Usuarios
+            </a>
+          </li>
+          <li>
+            <a routerLink="/admin/settings" routerLinkActive="!bg-[var(--color-primary)]/18 !text-white !font-bold !border-l-[var(--color-primary)]"
+               (click)="closeSidebar()"
+               class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-white/70 border-l-[3px] border-transparent
+                      text-[0.88rem] font-medium transition-colors hover:bg-white/8 hover:text-white">
+              <span class="material-symbols-outlined text-lg leading-none">settings</span>
+              Configuración
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+    </nav>
+
+    <!-- User card -->
+    <div *ngIf="authService.currentUser() as user"
+         class="flex items-center gap-2.5 px-5 py-3.5 border-t border-white/8 bg-black/15">
+      <img [src]="user.avatar" alt="Avatar"
+           class="w-9 h-9 rounded-full border-2 border-[var(--color-primary)] object-cover shrink-0">
+      <div class="flex flex-col min-w-0 flex-1">
+        <span class="text-[0.82rem] font-bold text-white truncate">{{ user.name }}</span>
+        <span class="text-[0.66rem] font-semibold uppercase tracking-wider text-[var(--color-primary-light)]">{{ user.role }}</span>
+      </div>
+      <button (click)="logout()"
+              class="flex items-center justify-center w-8 h-8 rounded-lg
+                     bg-[var(--color-accent-red)]/15 text-[#ef5350] shrink-0
+                     hover:bg-[var(--color-accent-red)]/30 hover:text-white transition-colors cursor-pointer"
+              title="Cerrar sesión">
+        <span class="material-symbols-outlined text-lg">logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ─── Main Content ─── -->
+  <div class="flex flex-1 flex-col min-w-0 overflow-hidden">
+
+    <!-- Top Header -->
+    <header class="flex items-center justify-between h-14 px-4 sm:px-6
+                    bg-white border-b border-neutral-200 shadow-xs z-10">
+      <!-- Mobile hamburger -->
+      <button (click)="toggleSidebar()"
+              class="flex items-center justify-center w-9 h-9 rounded-lg
+                     text-neutral-600 hover:bg-neutral-100 transition-colors lg:hidden cursor-pointer">
+        <span class="material-symbols-outlined text-xl">menu</span>
+      </button>
+
+      <!-- Greeting (hidden on very small screens) -->
+      <div class="hidden sm:flex items-center lg:ml-0" *ngIf="authService.currentUser() as user">
+        <span class="text-sm text-[var(--color-text-secondary)]">
+          Hola, <strong class="text-[var(--color-text-primary)] font-bold">{{ user.name }}</strong>
+        </span>
+      </div>
+
+      <!-- Spacer on mobile -->
+      <div class="flex-1 lg:hidden"></div>
+
+      <!-- Mobile logo -->
+      <img src="assets/logo-bafott.png" alt="BAFOTT"
+           class="w-8 h-8 object-contain lg:hidden">
+    </header>
+
+    <!-- Content Area -->
+    <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-[var(--color-background)]">
+      <router-outlet></router-outlet>
+    </main>
+
+    <!-- Bottom accent -->
+    <div class="flex h-[3px] shrink-0">
+      <span class="flex-1 bg-[var(--color-accent-red)]"></span>
+      <span class="flex-1 bg-[var(--color-accent-yellow)]"></span>
+      <span class="flex-1 bg-[var(--color-accent-green)]"></span>
+    </div>
+  </div>
+</div>
